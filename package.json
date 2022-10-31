@@ -1,0 +1,30 @@
+{
+  "name": "backend_highlightit",
+  "version": "1.0.0",
+  "description": "A MySQL Graphql backend server for my open sourced app",
+  "main": "index.js",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "dev:server": "nodemon --watch './src/**/*' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonathan Coletti",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.3",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "apollo-server-core": "^3.10.3",
+    "apollo-server-express": "^3.10.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "graphql": "^16.6.0",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.25.3"
+  }
+}
