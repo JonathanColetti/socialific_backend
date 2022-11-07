@@ -176,7 +176,7 @@ CREATE TABLE tagratings(
 
 CREATE TABLE soundratings(
     id int NOT NULL AUTO_INCREMENT,
-    uaid int NOT NULL,
+    auid int NOT NULL,
     sndid int NOT NULL,
     score int DEFAULT 1600,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
