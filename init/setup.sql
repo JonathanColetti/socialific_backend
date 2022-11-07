@@ -43,20 +43,28 @@ CREATE TABLE mediatype(
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
-    
+);
+CREATE TABLE sounds(
+    id int NOT NULL AUTO_INCREMENT,
+    soundlnk varchar(300) NOT NULL,
+    pid int,
+    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (pid) REFERENCES profiles(id),
+    PRIMARY KEY (id)
 );
 CREATE TABLE posts(
     id int NOT NULL,
     ctid int NOT NULL,
     pid int NOT NULL,
+    soundid int,
     caption varchar(100),
     medialnk varchar(500),
     plocation varchar(200),
     pinned TINYINT DEFAULT 0,
-    -- soundid int,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    -- FOREIGN KEY (soundid) REFERENCES sounds(id),
+    FOREIGN KEY (soundid) REFERENCES sounds(id),
     FOREIGN KEY (ctid) REFERENCES mediatype(id),
     FOREIGN KEY (pid) REFERENCES profiles(id),
     PRIMARY KEY (id)
@@ -65,11 +73,11 @@ CREATE TABLE posts(
 CREATE TABLE tags(
     id int NOT NULL AUTO_INCREMENT,
     tagname varchar(50) NOT NULL,
+    pstid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (pstid) REFERENCES posts(id),
     PRIMARY KEY (id)
-
-
 );
 
 CREATE TABLE comments(
@@ -83,8 +91,6 @@ CREATE TABLE comments(
     FOREIGN KEY (postid) REFERENCES posts(id),
     FOREIGN KEY (pid) REFERENCES profiles(id),
     PRIMARY KEY (id)
-
-
 );
 
 CREATE TABLE replies(
@@ -95,19 +101,9 @@ CREATE TABLE replies(
     commentlnk varchar(100),
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
     FOREIGN KEY (pid) REFERENCES profiles(id),
-    FOREIGN KEY (cmtid) REFERENCES comments(id)
-);
-
--- Each sound 
-CREATE TABLE sounds(
-    id int NOT NULL AUTO_INCREMENT,
-    soundlnk varchar(300),
-    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (cmtid) REFERENCES comments(id),
     PRIMARY KEY (id)
-    
 );
 
 CREATE TABLE history(
@@ -190,55 +186,51 @@ CREATE TABLE replylikes(
     profileid int NOT NULL,
     rplyid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (profileid, rplyid),
     FOREIGN KEY (profileid) REFERENCES profiles(id),
-    FOREIGN KEY (rplyid) REFERENCES replies(id)
+    FOREIGN KEY (rplyid) REFERENCES replies(id),
+    PRIMARY KEY (profileid, rplyid)
 );
 
 CREATE TABLE commentlikes(
     profileid int NOT NULL,
     cmtid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (profileid, cmtid),
     FOREIGN KEY (profileid) REFERENCES profiles(id),
-    FOREIGN KEY (cmtid) REFERENCES comments(id)
+    FOREIGN KEY (cmtid) REFERENCES comments(id),
+    PRIMARY KEY (profileid, cmtid)
 );
 
 CREATE TABLE postlikes(
     profileid int NOT NULL,
     postid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (profileid, postid),
     FOREIGN KEY (profileid) REFERENCES profiles(id),
-    FOREIGN KEY (postid) REFERENCES posts(id)
+    FOREIGN KEY (postid) REFERENCES posts(id),
+    PRIMARY KEY (profileid, postid)
 );
-
-
-
 CREATE TABLE posttags(
     postid int NOT NULL,
     tagid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (postid, tagid),
     FOREIGN KEY (postid) REFERENCES posts(id),
-    FOREIGN KEY (tagid) REFERENCES tags(id)
+    FOREIGN KEY (tagid) REFERENCES tags(id),
+    PRIMARY KEY (postid, tagid)
 );
 
 CREATE TABLE profilelikes(
     userauthid int NOT NULL,
     profileid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (userauthid, profileid),
     FOREIGN KEY (userauthid) REFERENCES userauth(id),
-    FOREIGN KEY (profileid) REFERENCES profiles(id)
-
+    FOREIGN KEY (profileid) REFERENCES profiles(id),
+    PRIMARY KEY (userauthid, profileid)
 );
 
 CREATE TABLE profileviews(
     userauthid int NOT NULL,
     profileid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (userauthid, profileid),
     FOREIGN KEY (userauthid) REFERENCES userauth(id),
-    FOREIGN KEY (profileid) REFERENCES profiles(id)
+    FOREIGN KEY (profileid) REFERENCES profiles(id),
+    PRIMARY KEY (userauthid, profileid)
 );
