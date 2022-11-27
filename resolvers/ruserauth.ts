@@ -8,7 +8,7 @@ export interface iuserauth {
     gender: string,
     email: string,
     userpass: string,
-    ipaddr: string,
+    ipaddr: any,
     coins: number,
     lastlgn: any,
     birthday: any,
@@ -21,12 +21,15 @@ export default async function resolveUserAuth(uid: string, email: string, passwo
 
     /* 
     TODO
-        - Parse through JSON ip addr 
-    Get top level authentication i.e verify user
+        - Maybe add leanicy to ip
+    Get top level authentication
         a. find user data based on given uid i.e validation
         b. Login i.e trade email or phonenum for uid
         */
     var retuserauth: iuserauth | null = null;
+    var sameIp: boolean = false;
+    
+
     if (uid !== undefined) {
         // Get profile based on uid
         retuserauth = await db.userauth.findOne({
@@ -48,7 +51,18 @@ export default async function resolveUserAuth(uid: string, email: string, passwo
                 phonenum: phonenum,
                 password: password
         }});
-    } if (retuserauth !== null && retuserauth.ipaddr !== ipaddr) {
+    } 
+    var i: number = 0;
+    const jsonips: any = JSON.parse(retuserauth!.ipaddr);
+    while (jsonips[i] !== undefined) {
+        if (jsonips[i] !== ipaddr) i++;
+        else {
+            sameIp = true;
+            break;
+        }
+
+    }
+    if (!sameIp) {
         // verify user through SMS or email. This is handled in the front end thus throw custom error
         const message: string = "";
         const phone: string | null = null;
