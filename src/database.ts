@@ -17,10 +17,10 @@ let models: Array<Function> = [
 ]
 export const sequelize = new Sequelize(
     'highlightit',
-    'TMP',
-    'TMP',  
+    'ADMIN',
+    'ADMIN',  
     {
-        host: 'database-1.cemuo1fwz6go.us-east-1.rds.amazonaws.com',
+        host: 'SECRET',
         port: 3306,
         dialect: 'mysql',
         define: {
