@@ -1,5 +1,5 @@
 import db from "../database"
-import {twofactorauth} from "../lib/util/verification/verification";
+import verifyip from "../lib/util/verification/checkip"
 
 export interface iuserauth {
     id: number,
@@ -21,13 +21,12 @@ export default async function resolveUserAuth(uid: string, email: string, passwo
 
     /* 
     TODO
-        - Maybe add leanicy to ip
+        - Add two factor auth
     Get top level authentication
         a. find user data based on given uid i.e validation
         b. Login i.e trade email or phonenum for uid
         */
     var retuserauth: iuserauth | null = null;
-    
 
     if (uid !== undefined) {
         // Get profile based on uid
@@ -51,6 +50,7 @@ export default async function resolveUserAuth(uid: string, email: string, passwo
                 password: password
         }});
     } 
+    if (verifyip(ipaddr, retuserauth!) == false) return null; 
      
 
     return retuserauth;
