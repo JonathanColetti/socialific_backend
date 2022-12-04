@@ -40,7 +40,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
   }, {
     sequelize,
     tableName: 'tagratings',
-    timestamps: true,
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

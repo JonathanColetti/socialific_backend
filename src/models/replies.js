@@ -43,7 +43,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
   }, {
     sequelize,
     tableName: 'replies',
-    timestamps: true,
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

@@ -1,5 +1,4 @@
 import {Sequelize} from 'sequelize';
-import {resolve} from 'path';
 import Profiles from './models/profiles.js';
 import userauth from './models/userauth.js';
 import posts from './models/posts.js';
@@ -18,11 +17,11 @@ let models: Array<Function> = [
 ]
 export const sequelize = new Sequelize(
     'highlightit',
-    process.env.DBUSER!,
-    process.env.DBPASS,
+    'admin',
+    '&&JHacker55MYSQL123&&',  
     {
-        host: process.env.DBIP,
-        port: parseInt(process.env.DBPORT!),
+        host: 'database-1.cemuo1fwz6go.us-east-1.rds.amazonaws.com',
+        port: 3306,
         dialect: 'mysql',
         define: {
             freezeTableName: true,

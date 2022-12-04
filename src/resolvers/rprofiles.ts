@@ -1,5 +1,5 @@
 import db from "../database";
-import fuzzymatch from "../lib/fuzzymatch";
+import fuzzymatch from "../lib/util/algorithms/fuzzymatch";
 
 interface iprofiles {
     id: number,
@@ -42,7 +42,7 @@ export default async function resolveProfiles(username: string, id: number): Pro
 
     // get 5 of the most relevant users 
     else if (username !== undefined) {
-        // O(N^2) 
+        // O(N) 
         allprofiles.map((pro: iprofiles, index: number) => {            
             if (fuzzymatch(pro.username, username)) {
                 retval.push(allprofiles[index]) 

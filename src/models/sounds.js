@@ -24,6 +24,6 @@ return sequelize.define('sounds', {
     }, {
         sequelize,
         tableName: 'sounds',
-        timestamps: true,
+        timestamps: false,
     })
 };

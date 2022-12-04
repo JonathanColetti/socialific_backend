@@ -25,7 +25,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
   }, {
     sequelize,
     tableName: 'reports',
-    timestamps: true,
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

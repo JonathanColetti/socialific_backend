@@ -58,7 +58,7 @@ export default function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'userauth',
-    timestamps: true,
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",

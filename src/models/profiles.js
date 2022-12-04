@@ -68,7 +68,7 @@ export default function Profiles(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'profiles',
-    timestamps: true,
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
