@@ -1,5 +1,7 @@
-export default function verifyip(ipaddr: String) {
+import { iuserauth } from "../../../resolvers/ruserauth";
+import { twofactorauth } from "./verification";
 
+export default function verifyip(ipaddr: String, retuserauth: iuserauth): boolean {
     var sameIp: boolean = false;
     var i: number = 0;
     const jsonips: any = JSON.parse(retuserauth!.ipaddr);
@@ -16,8 +18,8 @@ export default function verifyip(ipaddr: String) {
         const message: string = "";
         const phone: string | null = null;
         const email: string | null = null;
-        verify(message, phone, email);
-        return null;
+        twofactorauth(message, phone, email);
     }
+    return sameIp;
     
 }
