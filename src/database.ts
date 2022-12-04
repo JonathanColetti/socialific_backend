@@ -17,8 +17,8 @@ let models: Array<Function> = [
 ]
 export const sequelize = new Sequelize(
     'highlightit',
-    'admin',
-    '&&JHacker55MYSQL123&&',  
+    'TMP',
+    'TMP',  
     {
         host: 'database-1.cemuo1fwz6go.us-east-1.rds.amazonaws.com',
         port: 3306,
