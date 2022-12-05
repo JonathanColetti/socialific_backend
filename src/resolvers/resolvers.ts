@@ -13,7 +13,7 @@ const resolvers = {
         },
         posts: async (parent: any, args: {uid: string}, context: any, info: any) => {
             return await resolvePosts(args.uid, context.request.req.headers);
-        }        
+        } 
         
     },
 }

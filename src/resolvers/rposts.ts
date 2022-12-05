@@ -41,7 +41,7 @@ export default async function resolvePosts(uid: string, ipaddr: string) {
         order: sequelize.literal('score')
     })
     console.log(mediatyperating[0].score)
-    
+    return null; 
     /* 
         
         Order of returning data 
