@@ -1,16 +1,17 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('userratings', {
+import { Sequelize as _Sequelize } from 'sequelize';
+export default function(sequelize, DataTypes) {
+  return sequelize.define('replies', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    auid: {
+    cmtid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'userauth',
+        model: 'comments',
         key: 'id'
       }
     },
@@ -22,24 +23,27 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         key: 'id'
       }
     },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 1600
+    comment: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    commentlnk: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     },
     time_created: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
     },
     time_updated: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
-    tableName: 'userratings',
+    tableName: 'replies',
     timestamps: false,
     indexes: [
       {
@@ -58,10 +62,10 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "uauth",
+        name: "cmtid",
         using: "BTREE",
         fields: [
-          { name: "auid" },
+          { name: "cmtid" },
         ]
       },
     ]

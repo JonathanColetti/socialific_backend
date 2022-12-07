@@ -1,16 +1,16 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('userratings', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('posts', {
     id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    auid: {
+    ctid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'userauth',
+        model: 'mediatype',
         key: 'id'
       }
     },
@@ -22,10 +22,30 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         key: 'id'
       }
     },
-    score: {
+    soundid: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      defaultValue: 1600
+      references: {
+        model: 'sounds',
+        key: 'id'
+      }
+    },
+    caption: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    medialnk: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    plocation: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
+    pinned: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      defaultValue: 0
     },
     time_created: {
       type: DataTypes.DATE,
@@ -39,7 +59,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     }
   }, {
     sequelize,
-    tableName: 'userratings',
+    tableName: 'posts',
     timestamps: false,
     indexes: [
       {
@@ -51,17 +71,24 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
+        name: "soundid",
+        using: "BTREE",
+        fields: [
+          { name: "soundid" },
+        ]
+      },
+      {
+        name: "ctid",
+        using: "BTREE",
+        fields: [
+          { name: "ctid" },
+        ]
+      },
+      {
         name: "pid",
         using: "BTREE",
         fields: [
           { name: "pid" },
-        ]
-      },
-      {
-        name: "uauth",
-        using: "BTREE",
-        fields: [
-          { name: "auid" },
         ]
       },
     ]

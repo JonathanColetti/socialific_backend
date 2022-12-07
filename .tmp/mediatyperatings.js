@@ -1,24 +1,25 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('userratings', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('mediatyperatings', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
+    ctid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'mediatype',
+        key: 'id'
+      }
+    },
     auid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'userauth',
-        key: 'id'
-      }
-    },
-    pid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'profiles',
         key: 'id'
       }
     },
@@ -39,7 +40,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     }
   }, {
     sequelize,
-    tableName: 'userratings',
+    tableName: 'mediatyperatings',
     timestamps: false,
     indexes: [
       {
@@ -51,14 +52,14 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "pid",
+        name: "ctid",
         using: "BTREE",
         fields: [
-          { name: "pid" },
+          { name: "ctid" },
         ]
       },
       {
-        name: "uauth",
+        name: "auid",
         using: "BTREE",
         fields: [
           { name: "auid" },

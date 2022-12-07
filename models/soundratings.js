@@ -1,5 +1,6 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('userratings', {
+import { Sequelize as _Sequelize } from 'sequelize';
+export default function(sequelize, DataTypes) {
+  return sequelize.define('soundratings', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -14,11 +15,11 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         key: 'id'
       }
     },
-    pid: {
+    sndid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'profiles',
+        model: 'sounds',
         key: 'id'
       }
     },
@@ -30,16 +31,16 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     time_created: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
     },
     time_updated: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
-    tableName: 'userratings',
+    tableName: 'soundratings',
     timestamps: false,
     indexes: [
       {
@@ -51,14 +52,14 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "pid",
+        name: "sndid",
         using: "BTREE",
         fields: [
-          { name: "pid" },
+          { name: "sndid" },
         ]
       },
       {
-        name: "uauth",
+        name: "auid",
         using: "BTREE",
         fields: [
           { name: "auid" },

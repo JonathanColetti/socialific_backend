@@ -1,12 +1,15 @@
 import {Sequelize} from 'sequelize';
+import dotenv from 'dotenv';
+
+import posts from './models/posts.js';
 import Profiles from './models/profiles.js';
 import userauth from './models/userauth.js';
-import posts from './models/posts.js';
-import dotenv from 'dotenv';
+import mediatype from './models/mediatype.js';
 import tagratings from './models/tagratings.js';
 import userratings from './models/userratings.js';
 import soundratings from './models/soundratings.js';
 import mediatyperatings from './models/mediatyperatings.js';
+
 
 dotenv.config()
 
@@ -21,7 +24,7 @@ let models: Array<Function> = [
     tagratings,
     userratings,
     soundratings,
-    mediatyperatings
+    mediatyperatings,
 ]
 export const sequelize = new Sequelize(
     process.env.DB!,
@@ -32,6 +35,7 @@ export const sequelize = new Sequelize(
         port: 3306,
         dialect: 'mysql',
         define: {
+            timestamps: false, // timestamps are handled by us
             freezeTableName: true,
         },
         pool: {
@@ -41,6 +45,7 @@ export const sequelize = new Sequelize(
             idle: 10000,
         },
     },
+   
 )
 
 // Initialize models

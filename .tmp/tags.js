@@ -1,31 +1,23 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('userratings', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('tags', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    auid: {
+    tagname: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    pstid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'userauth',
+        model: 'posts',
         key: 'id'
       }
-    },
-    pid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'profiles',
-        key: 'id'
-      }
-    },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 1600
     },
     time_created: {
       type: DataTypes.DATE,
@@ -39,7 +31,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     }
   }, {
     sequelize,
-    tableName: 'userratings',
+    tableName: 'tags',
     timestamps: false,
     indexes: [
       {
@@ -51,17 +43,10 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "pid",
+        name: "pstid",
         using: "BTREE",
         fields: [
-          { name: "pid" },
-        ]
-      },
-      {
-        name: "uauth",
-        using: "BTREE",
-        fields: [
-          { name: "auid" },
+          { name: "pstid" },
         ]
       },
     ]

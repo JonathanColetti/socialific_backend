@@ -24,7 +24,8 @@ export default async function resolveUserAuth(uid: string, email: string, passwo
         - Add two factor auth
     Get top level authentication
         a. find user data based on given uid i.e validation
-        b. Login i.e trade email or phonenum for uid
+        b. check if ip matches and no sus behaviour
+        c. Login i.e trade email or phonenum for uid
         */
     var retuserauth: iuserauth | null = null;
 

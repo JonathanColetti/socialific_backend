@@ -1,16 +1,17 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('userratings', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('comments', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    auid: {
+    postid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'userauth',
+        model: 'posts',
         key: 'id'
       }
     },
@@ -22,10 +23,13 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         key: 'id'
       }
     },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 1600
+    comment: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    commentlnk: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     },
     time_created: {
       type: DataTypes.DATE,
@@ -39,7 +43,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     }
   }, {
     sequelize,
-    tableName: 'userratings',
+    tableName: 'comments',
     timestamps: false,
     indexes: [
       {
@@ -51,17 +55,17 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
+        name: "postid",
+        using: "BTREE",
+        fields: [
+          { name: "postid" },
+        ]
+      },
+      {
         name: "pid",
         using: "BTREE",
         fields: [
           { name: "pid" },
-        ]
-      },
-      {
-        name: "uauth",
-        using: "BTREE",
-        fields: [
-          { name: "auid" },
         ]
       },
     ]

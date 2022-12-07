@@ -5,6 +5,8 @@ import resolvers from './resolvers/resolvers';
 import { createContext } from './context';
 import requestIp from "request-ip";
 
+// express server configuration
+
 const app = express()
 app.use(requestIp.mw());
 const port: number = 5100;

@@ -49,6 +49,38 @@ const typeDefs: DocumentNode = gql`
         time_created: String
         time_updated: String
     }
+    type tagratings {
+        id: ID!
+        auid: Int
+        tagid: Int
+        score: Int
+        time_created: String
+        time_updated: String
+    }
+    type userratings {
+        id: ID!
+        auid: Int
+        pid: Int
+        score: Int
+        time_created: String
+        time_updated: String
+    }
+    type soundratings {
+        id: ID!
+        auid: Int
+        sndid: Int
+        score: Int
+        time_created: String
+        time_updated: String
+    }
+    type mediatyperatings {
+        id: ID!
+        auid: Int
+        ctid: Int
+        score: Int
+        time_created: String
+        time_updated: String
+    }
     
 `
 

@@ -1,0 +1,1 @@
+    - fix init_modules.js to support new tables

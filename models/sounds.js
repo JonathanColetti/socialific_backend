@@ -1,45 +1,37 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('userratings', {
+import { Sequelize as _Sequelize } from 'sequelize';
+export default function(sequelize, DataTypes) {
+  return sequelize.define('sounds', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    auid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'userauth',
-        key: 'id'
-      }
+    soundlnk: {
+      type: DataTypes.STRING(300),
+      allowNull: false
     },
     pid: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'profiles',
         key: 'id'
       }
     },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 1600
-    },
     time_created: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
     },
     time_updated: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
-    tableName: 'userratings',
+    tableName: 'sounds',
     timestamps: false,
     indexes: [
       {
@@ -55,13 +47,6 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         using: "BTREE",
         fields: [
           { name: "pid" },
-        ]
-      },
-      {
-        name: "uauth",
-        using: "BTREE",
-        fields: [
-          { name: "auid" },
         ]
       },
     ]

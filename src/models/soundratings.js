@@ -7,6 +7,14 @@ export default function(sequelize, DataTypes) {
             allowNull: false,
             primaryKey: true
         },
+        auid: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'userauth',
+                key: 'id'
+            }
+        },
         score: {
             type: DataTypes.INTEGER,
             default: 1600,
@@ -17,9 +25,9 @@ export default function(sequelize, DataTypes) {
             defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
         },
         time_updated: {
-        type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
         }
     })
 };

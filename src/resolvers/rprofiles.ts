@@ -17,13 +17,14 @@ interface iprofiles {
     time_created: any,
     time_updated: any,
 }
-
+// find profiles based on variables
+//  a. check if id or username is set and get profiles based on that
+//  b. default is most popular creators / creators they would like 
 export default async function resolveProfiles(username: string, id: number): Promise<any> {
     /* 
     TODO
         - Improve fuzzysearch alg
-    ResolveProfiles this function that finds profiles. 
-    mainly used in searching or clicking 
+        - Get profiles they would like if username is or id is mt (based on score)
     */
     
     // Get all profiles in a object

@@ -135,13 +135,13 @@ CREATE TABLE reports(
 
 CREATE TABLE userratings(
     id int NOT NULL AUTO_INCREMENT,
-    uauth int NOT NULL,
+    auid int NOT NULL,
     pid int NOT NULL,
     score int DEFAULT 1600,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (pid) REFERENCES profiles(id),
-    FOREIGN KEY (uauth) REFERENCES userauth(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     PRIMARY KEY (id)
 
 );

@@ -1,18 +1,11 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('userratings', {
+import { Sequelize as _Sequelize } from 'sequelize';
+export default function(sequelize, DataTypes) {
+  return sequelize.define('history', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
-    },
-    auid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'userauth',
-        key: 'id'
-      }
     },
     pid: {
       type: DataTypes.INTEGER,
@@ -22,24 +15,37 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         key: 'id'
       }
     },
-    score: {
+    vid: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'posts',
+        key: 'id'
+      }
+    },
+    clicked: {
+      type: DataTypes.TINYINT,
       allowNull: true,
-      defaultValue: 1600
+      defaultValue: 0
+    },
+    rewatched: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      defaultValue: 0
     },
     time_created: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
     },
     time_updated: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
-    tableName: 'userratings',
+    tableName: 'history',
     timestamps: false,
     indexes: [
       {
@@ -58,10 +64,10 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "uauth",
+        name: "vid",
         using: "BTREE",
         fields: [
-          { name: "auid" },
+          { name: "vid" },
         ]
       },
     ]

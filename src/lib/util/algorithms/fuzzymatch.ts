@@ -1,5 +1,5 @@
 
-
+// fuzzy match possible users for given string
 export default function fuzzymatch(tomatch: string,fquery: string) {
     tomatch = tomatch.toLowerCase()
     fquery = fquery.toLowerCase()
