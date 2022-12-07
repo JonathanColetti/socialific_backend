@@ -26,7 +26,7 @@ interface iposts {
 // @param profile-id if the user looking for profile content
 // @param sound-id if the user is looking through sounds
 // @param ipaddr users ip to verify stuff
-export default async function resolvePosts(uid: string, ipaddr: string) {
+export default async function resolvePosts(uid: string, tid: number, pid: number, sndid: number, mid: number, ipaddr: string) {
     // Return 6 x 6 posts based on the user
     if (uid === undefined) return null;
 

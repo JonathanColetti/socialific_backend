@@ -11,8 +11,8 @@ const resolvers = {
         profiles: async (parent: any, args: {username: string, id: number}, context: any, info: any) => {
             return await resolveProfiles(args.username, args.id);
         },
-        posts: async (parent: any, args: {uid: string}, context: any, info: any) => {
-            return await resolvePosts(args.uid, context.request.req.headers);
+        posts: async (parent: any, args: {uid: string, tid: number, pid: number, sndid: number, mid: number}, context: any, info: any) => {
+            return await resolvePosts(args.uid, args.tid, args.pid, args.sndid, args.mid, context.request.req.headers);
         } 
         
     },

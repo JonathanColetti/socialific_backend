@@ -45,6 +45,7 @@ export default async function resolveProfiles(username: string, id: number): Pro
     else if (username !== undefined) {
         // O(N) 
         allprofiles.map((pro: iprofiles, index: number) => {            
+            // O(N^2)
             if (fuzzymatch(pro.username, username)) {
                 retval.push(allprofiles[index]) 
             }
