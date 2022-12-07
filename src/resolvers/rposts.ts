@@ -80,7 +80,7 @@ export default async function resolvePosts(uid: string, tid: number, pid: number
     return null; 
     /* 
 
-        Order of returning data 3 * 6 (3 rows 6 peices of media)
+        Order of returning data 6 * 6 (6 rows 6 peices of media)
             - Highlights with or without favourite media type
             - Favourite profile or most popular profile w media type
             - Favourite tag or most popular tag
