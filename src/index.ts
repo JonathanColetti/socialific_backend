@@ -4,6 +4,7 @@ import typeDefs from './lib/typedefs';
 import resolvers from './resolvers/resolvers';
 import { createContext } from './context';
 import requestIp from "request-ip";
+import { loadhashmap } from './lib/datastructures/hashmap';
 
 // express server configuration
 
@@ -17,10 +18,13 @@ const server = new ApolloServer({
     context: createContext
 });
 
+
 await server.start()
 server.applyMiddleware({app})
 
-
+// load hashmap from database
+await loadhashmap()
+// setup routes,
 app.get('/', (req: Request, res: Response) => {
   res.json({ greeting: 'Welcome to our server. Want a job? Send resumes to jonathancoletti@highlightit.biz' })
 })

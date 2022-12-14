@@ -1,6 +1,6 @@
 import db, { sequelize } from "../database";
 import {iuserauth} from "./ruserauth";
- 
+import { ratinghashmap } from "../lib/datastructures/hashmap";
 interface iposts {
     id: number,
     ctid: number,
@@ -29,7 +29,8 @@ interface iposts {
 export default async function resolvePosts(uid: string, tid: number, pid: number, sndid: number, mid: number, ipaddr: string) {
     // Return 6 x 6 posts based on the user
     if (uid === undefined) return null;
-
+    // check hashmap for user if doesnt exist return null
+    if (ratinghashmap[uid] === undefined) return null;
     // fetch contenttyperratings, tagratings, userrating based on uid
     let posts: Array<iposts> = [];
 
@@ -38,44 +39,11 @@ export default async function resolvePosts(uid: string, tid: number, pid: number
         where: {
             userid: uid
         }
-    })
-    const tagrating: any = await db.tagratings.findAll({
-        where: {auid: theaccount.id},
-        order: sequelize.literal('score')
-    })
-    const profilerating: any = await db.userratings.findAll({
-        where: {auid: theaccount.id},
-        order: sequelize.literal('score')
-    })
-    const soundrating: any = await db.soundratings.findAll({
-        where: {auid: theaccount.id},
-        order: sequelize.literal('score')
-    })
-
-    const mediatyperating: any = await db.mediatyperatings.findAll({
-        where: {auid: theaccount.id},
-        order: sequelize.literal('score')
-    })
-
-    // Testing purposes
-    profilerating.forEach((element: any) => {
-        console.log(element.auid);
-        
     });
+    // if hashmap does not contain user fetch score ratings and insert 
+    
 
-    soundrating.forEach((element: any) => {
-        console.log(element.auid);
-        
-    });
-
-    tagrating.forEach((element: any) => {
-        console.log(element.auid);
-        
-    });
-    mediatyperating.forEach((element: any) => {
-        console.log(element.auid);
-        
-    });
+    
 
     return null; 
     /* 
