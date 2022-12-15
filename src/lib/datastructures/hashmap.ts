@@ -13,6 +13,7 @@ interface irating {
     mtratings?: Map<number, number>
     pratings?: Map<number, number>
     sratings?: Map<number, number>
+    history?: Map<number, number>
 }
 
 
@@ -22,11 +23,13 @@ let htagratings: Map<number, number> = new Map<number, number>();
 let hmediatyperatings: Map<number, number> = new Map<number, number>();
 let hprofileratings: Map<number, number> = new Map<number, number>();
 let hsoundratings: Map<number, number> = new Map<number, number>();
+let hhistory: Map<number, number> = new Map<number, number>();
 ratinghashmap["uid"] = {
     tratings: htagratings,
     mtratings: hmediatyperatings,
     pratings: hprofileratings,
-    sratings: hsoundratings
+    sratings: hsoundratings,
+    history: hhistory
 }
 
 // Rebuild hashmap. Ran when the server is reran 
@@ -50,7 +53,8 @@ export const sethashmap = async (theaccount: iuserauth) => {
             pratings: new Map<number, number>(),
             tratings: new Map<number, number>(),
             mtratings: new Map<number, number>(),
-            sratings: new Map<number, number>()
+            sratings: new Map<number, number>(),
+            history: new Map<number, number>()
         }
     }
     
@@ -66,6 +70,9 @@ export const sethashmap = async (theaccount: iuserauth) => {
 
     const mediatyperating: Array<imediatyperatings> = await db.mediatyperatings.findAll({
         where: {auid: theaccount.id},
+    })
+    const history: Array<any> = await db.history.findAll({
+        where: {auid: theaccount.id}
     })
     // write the lists to 
     tagrating.map((thetag: itagratings) => {
@@ -109,6 +116,16 @@ export const sethashmap = async (theaccount: iuserauth) => {
     if (ratinghashmap[theaccount.userid].mtratings !== undefined) {
         ratinghashmap[theaccount.userid] = {
             mtratings: new Map([...ratinghashmap[theaccount.userid].mtratings!.entries()].sort((a, b) => b[1] - a[1]))
+        }
+    }
+    history.map((hvid: any) => {
+        ratinghashmap[theaccount.userid] = {
+            history: ratinghashmap[theaccount.userid].history?.set(hvid.id, hvid.score)
+        }
+    })
+    if (ratinghashmap[theaccount.userid].history !== undefined) {
+        ratinghashmap[theaccount.userid] = {
+            history: new Map([...ratinghashmap[theaccount.userid].history!.entries()].sort((a, b) => b[1] - a[1]))
         }
     }
     

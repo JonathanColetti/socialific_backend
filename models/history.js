@@ -1,5 +1,5 @@
-import { Sequelize as _Sequelize } from 'sequelize';
-export default function(sequelize, DataTypes) {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
   return sequelize.define('history', {
     id: {
       autoIncrement: true,
@@ -23,25 +23,20 @@ export default function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    clicked: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 0
-    },
-    rewatched: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 0
+    score: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1600
     },
     time_created: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
     time_updated: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

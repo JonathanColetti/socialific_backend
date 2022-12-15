@@ -1,5 +1,5 @@
-import { Sequelize as _Sequelize } from 'sequelize';
-export default function(sequelize, DataTypes) {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
   return sequelize.define('postlikes', {
     profileid: {
       type: DataTypes.INTEGER,
@@ -22,7 +22,7 @@ export default function(sequelize, DataTypes) {
     time_created: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

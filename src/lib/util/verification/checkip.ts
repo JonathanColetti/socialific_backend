@@ -1,6 +1,12 @@
 import { iuserauth } from "../../../resolvers/ruserauth";
 import { twofactorauth } from "./verification";
+import {lookup} from 'geoip-lite';
 
+/* verify ip address to make sure user is LGTM
+    @param ipaddr       ip address to verify
+    @param retuserauth  account ip is trying to access
+    @return boolean     if allowed
+*/
 export default function verifyip(ipaddr: String, retuserauth: iuserauth): boolean {
     var sameIp: boolean = false;
     var i: number = 0;

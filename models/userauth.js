@@ -1,5 +1,5 @@
-import { Sequelize as _Sequelize } from 'sequelize';
-export default function(sequelize, DataTypes) {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
   return sequelize.define('userauth', {
     id: {
       type: DataTypes.INTEGER,
@@ -28,7 +28,7 @@ export default function(sequelize, DataTypes) {
       allowNull: true
     },
     ipaddr: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.STRING(100),
       allowNull: false
     },
     coins: {
@@ -43,17 +43,17 @@ export default function(sequelize, DataTypes) {
     lastlgn: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
     time_created: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
     time_updated: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: _Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

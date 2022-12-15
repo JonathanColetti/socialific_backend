@@ -1,6 +1,6 @@
-DROP DATABASE highlightit;
-CREATE DATABASE highlightit;
-USE highlightit;
+DROP DATABASE socialific;
+CREATE DATABASE socialific;
+USE socialific;
 
 CREATE TABLE userauth(
     id int NOT NULL, 
@@ -110,8 +110,7 @@ CREATE TABLE history(
     id int NOT NULL AUTO_INCREMENT,
     pid int NOT NULL,
     vid int NOT NULL,
-    clicked TINYINT DEFAULT 0,
-    rewatched TINYINT DEFAULT 0,
+    score int NOT NULL DEFAULT 1600, 
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (pid) REFERENCES profiles(id),

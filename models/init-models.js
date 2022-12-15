@@ -1,26 +1,26 @@
-import { DataTypes } from "sequelize";
-import _commentlikes from "./commentlikes";
-import _comments from "./comments";
-import _history from "./history";
-import _mediatype from "./mediatype";
-import _mediatyperatings from "./mediatyperatings";
-import _postlikes from "./postlikes";
-import _posts from "./posts";
-import _posttags from "./posttags";
-import _profilelikes from "./profilelikes";
-import _profiles from "./profiles";
-import _profileviews from "./profileviews";
-import _replies from "./replies";
-import _replylikes from "./replylikes";
-import _reports from "./reports";
-import _soundratings from "./soundratings";
-import _sounds from "./sounds";
-import _tagratings from "./tagratings";
-import _tags from "./tags";
-import _userauth from "./userauth";
-import _userratings from "./userratings";
+var DataTypes = require("sequelize").DataTypes;
+var _commentlikes = require("./commentlikes");
+var _comments = require("./comments");
+var _history = require("./history");
+var _mediatype = require("./mediatype");
+var _mediatyperatings = require("./mediatyperatings");
+var _postlikes = require("./postlikes");
+var _posts = require("./posts");
+var _posttags = require("./posttags");
+var _profilelikes = require("./profilelikes");
+var _profiles = require("./profiles");
+var _profileviews = require("./profileviews");
+var _replies = require("./replies");
+var _replylikes = require("./replylikes");
+var _reports = require("./reports");
+var _soundratings = require("./soundratings");
+var _sounds = require("./sounds");
+var _tagratings = require("./tagratings");
+var _tags = require("./tags");
+var _userauth = require("./userauth");
+var _userratings = require("./userratings");
 
-export function initModels(sequelize) {
+function initModels(sequelize) {
   var commentlikes = _commentlikes(sequelize, DataTypes);
   var comments = _comments(sequelize, DataTypes);
   var history = _history(sequelize, DataTypes);
@@ -142,7 +142,6 @@ export function initModels(sequelize) {
     userratings,
   };
 }
-const _initModels = initModels;
-export { _initModels as initModels };
-const _default = initModels;
-export { _default as default };
+module.exports = initModels;
+module.exports.initModels = initModels;
+module.exports.default = initModels;
