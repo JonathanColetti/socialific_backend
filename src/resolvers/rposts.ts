@@ -1,6 +1,7 @@
 import db, { sequelize } from "../database";
 import {iuserauth} from "./ruserauth";
 import { ratinghashmap } from "../lib/datastructures/hashmap";
+import verifyip from "../lib/util/verification/checkip";
 interface iposts {
     id: number,
     ctid: number,
@@ -40,12 +41,24 @@ export default async function resolvePosts(uid: string, tid: number, pid: number
             userid: uid
         }
     });
-    // if hashmap does not contain user fetch score ratings and insert 
-    
-
-    
-
-    return null; 
+    if (!verifyip(ipaddr, theaccount)) return null;
+    if (tid !== undefined) {
+        // find best posts for user based on certain tid (unseen)
+        return null;
+    }
+    else if (pid !== undefined) {
+        // find top rated posts by user (unseen) 
+        return null;
+    }
+    else if (sndid !== undefined) {
+        // find top rated posts based on sound (unseen)
+        return null;
+    }
+    else if (mid !== undefined) {
+        // find top rate posts based on mediatype (unseen)
+        return null;
+    }
+    // find 6 posts 
     /* 
 
         Order of returning data 6 * 6 (6 rows 6 peices of media)
