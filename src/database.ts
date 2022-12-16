@@ -9,6 +9,7 @@ import tagratings from './models/tagratings.js';
 import userratings from './models/userratings.js';
 import soundratings from './models/soundratings.js';
 import mediatyperatings from './models/mediatyperatings.js';
+import comments from './models/comments.js';
 
 
 dotenv.config()
@@ -21,6 +22,7 @@ let models: Array<Function> = [
     Profiles,
     userauth,
     posts,
+    comments,
     tagratings,
     userratings,
     soundratings,

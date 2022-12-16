@@ -25,6 +25,7 @@ CREATE TABLE profiles(
     bg VARCHAR(500),
     pubbg VARCHAR(500),
     stickers VARCHAR(500),
+    cmntstickers VARCHAR(500),
     border VARCHAR(100),
     font VARCHAR(100),
     rname VARCHAR(100),

@@ -1,6 +1,7 @@
 import resolveProfiles from "./rprofiles";
 import resolveUserAuth from "./ruserauth";
 import resolvePosts from "./rposts";
+import resolveComments from "./rcomments";
 
 const resolvers = {
     /* Every query resolver must have parent, args, context, info */
@@ -13,8 +14,10 @@ const resolvers = {
         },
         posts: async (parent: any, args: {uid: string, tid: number, pid: number, sndid: number, mid: number}, context: any, info: any) => {
             return await resolvePosts(args.uid, args.tid, args.pid, args.sndid, args.mid, context.request.req.headers);
-        } 
-        
+        },
+        comments: async (parent: any, args: {uid: string, postid: number}, context: any, info: any) => {
+            return await resolveComments(args.uid, context.request.req.clientIp, args.postid)
+        }, 
     },
 }
 

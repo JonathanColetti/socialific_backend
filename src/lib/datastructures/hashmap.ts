@@ -7,12 +7,13 @@ interface iratings {
     [userid: string]: irating
     
 }
-interface irating {
-    // (tagid), (score)
+export interface irating {
+    // (tagid), (score)...
     tratings?: Map<number, number>
     mtratings?: Map<number, number>
     pratings?: Map<number, number>
     sratings?: Map<number, number>
+    // (postid), (score)
     history?: Map<number, number>
 }
 

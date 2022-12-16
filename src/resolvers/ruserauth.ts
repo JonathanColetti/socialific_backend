@@ -51,7 +51,7 @@ export default async function resolveUserAuth(uid: string, email: string, passwo
                 password: password
         }});
     } 
-    if (verifyip(ipaddr, retuserauth!) == false) return null; 
+    if (!verifyip(ipaddr, retuserauth!)) return null; 
      
 
     return retuserauth;

@@ -6,6 +6,7 @@ const typeDefs: DocumentNode = gql`
         profiles(username: String, id: ID): [Profile]
         userauth(userid: String, phonenum: String, email: String, userpass: String): Userauth
         posts(uid: String): [Posts]
+        comments(uid: String, postid: Int): [comments]
     }
     type Userauth {
         id: ID!
@@ -48,6 +49,15 @@ const typeDefs: DocumentNode = gql`
         pinned: Int
         time_created: String
         time_updated: String
+    }
+    type comments {
+        id: ID!
+        postid: Int
+        pid: Int
+        comment: String
+        commentlnk: String
+        time_created: String
+        time_updated: String  
     }
     type tagratings {
         id: ID!
