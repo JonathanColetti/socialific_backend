@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 import { ApolloServer, Config, ExpressContext, gql } from 'apollo-server-express';
-import typeDefs from './lib/typedefs';
+import typeDefs from './typedefs';
 import resolvers from './resolvers/resolvers';
 import { createContext } from './context';
 import requestIp from "request-ip";
