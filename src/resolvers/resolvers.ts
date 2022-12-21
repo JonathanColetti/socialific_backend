@@ -19,7 +19,12 @@ const resolvers = {
             return await resolveComments(args.uid, args.postid, context.request.req.clientIp)
         }, 
     },
-    Mutations: {}
+    Mutations: {
+        
+        cprofile: async (parent: any, args: {uid: string,username: string, id: number}, context: any, info: any) => {
+            return null
+        }
+    }
 }
 
 export default resolvers;
