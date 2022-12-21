@@ -9,16 +9,17 @@ const resolvers = {
         userauth: async (parent: any, args: {userid: string, email: string, phonenum: string, password: string}, context: any, info: any) => {
             return await resolveUserAuth(args.userid, args.email, args.phonenum, args.password, context.request.req.clientIp);
         },
-        profiles: async (parent: any, args: {username: string, id: number}, context: any, info: any) => {
-            return await resolveProfiles(args.username, args.id);
+        profiles: async (parent: any, args: {uid: string,username: string, id: number}, context: any, info: any) => {
+            return await resolveProfiles(args.uid, args.username, args.id);
         },
         posts: async (parent: any, args: {uid: string, tid: number, pid: number, sndid: number, mid: number}, context: any, info: any) => {
             return await resolvePosts(args.uid, args.tid, args.pid, args.sndid, args.mid, context.request.req.headers);
         },
-        comments: async (parent: any, args: {uid: string, postid: number}, context: any, info: any) => {
-            return await resolveComments(args.uid, context.request.req.clientIp, args.postid)
+        Comments: async (parent: any, args: {uid: string, postid: number}, context: any, info: any) => {
+            return await resolveComments(args.uid, args.postid, context.request.req.clientIp)
         }, 
     },
+    Mutations: {}
 }
 
 export default resolvers;
