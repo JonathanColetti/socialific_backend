@@ -1,5 +1,4 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('reports', {
     id: {
       autoIncrement: true,
@@ -22,16 +21,6 @@ module.exports = function(sequelize, DataTypes) {
     extrainfo: {
       type: DataTypes.STRING(50),
       allowNull: true
-    },
-    time_created: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    time_updated: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

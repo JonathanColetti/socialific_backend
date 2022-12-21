@@ -6,7 +6,34 @@ const typeDefs: DocumentNode = gql`
         profiles(username: String, id: ID): [Profile]
         userauth(userid: String, phonenum: String, email: String, userpass: String): Userauth
         posts(uid: String): [Posts]
-        comments(uid: String, postid: Int): [comments]
+        Comments(uid: String, postid: Int): [Comments]
+    }
+    type Mutation {
+        cuserauth(input: UserAuthInput): Userauth
+        cprofile(input: ProfileInput): Profile
+        cpost(input: PostsInput): Posts 
+        ccomment(input: CommentInput): Comments
+    }
+    input UserAuthInput {
+        phonenum: String
+        gender: String
+        email: String
+        password: String
+        birthday: String
+    }
+    input PostsInput {
+        medialnk: String
+        caption: String
+        plocation: String
+    }
+    input ProfileInput {
+        username: String
+        propic: String
+    }
+    input CommentInput {
+        postid: Int
+        comment: String
+        commentlnk: String
     }
     type Userauth {
         id: ID!
@@ -50,7 +77,7 @@ const typeDefs: DocumentNode = gql`
         time_created: String
         time_updated: String
     }
-    type comments {
+    type Comments {
         id: ID!
         postid: Int
         pid: Int
@@ -59,7 +86,7 @@ const typeDefs: DocumentNode = gql`
         time_created: String
         time_updated: String  
     }
-    type tagratings {
+    type Tagratings {
         id: ID!
         auid: Int
         tagid: Int
@@ -67,7 +94,7 @@ const typeDefs: DocumentNode = gql`
         time_created: String
         time_updated: String
     }
-    type userratings {
+    type Userratings {
         id: ID!
         auid: Int
         pid: Int
@@ -75,7 +102,7 @@ const typeDefs: DocumentNode = gql`
         time_created: String
         time_updated: String
     }
-    type soundratings {
+    type Soundratings {
         id: ID!
         auid: Int
         sndid: Int
@@ -83,7 +110,7 @@ const typeDefs: DocumentNode = gql`
         time_created: String
         time_updated: String
     }
-    type mediatyperatings {
+    type Mediatyperatings {
         id: ID!
         auid: Int
         ctid: Int

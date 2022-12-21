@@ -1,5 +1,14 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('postlikes', {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+  return sequelize.define('profilelikes', {
+    userauthid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'userauth',
+        key: 'id'
+      }
+    },
     profileid: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -8,19 +17,10 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         model: 'profiles',
         key: 'id'
       }
-    },
-    postid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'posts',
-        key: 'id'
-      }
     }
   }, {
     sequelize,
-    tableName: 'postlikes',
+    tableName: 'profilelikes',
     timestamps: false,
     indexes: [
       {
@@ -28,15 +28,15 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         unique: true,
         using: "BTREE",
         fields: [
+          { name: "userauthid" },
           { name: "profileid" },
-          { name: "postid" },
         ]
       },
       {
-        name: "postid",
+        name: "profileid",
         using: "BTREE",
         fields: [
-          { name: "postid" },
+          { name: "profileid" },
         ]
       },
     ]

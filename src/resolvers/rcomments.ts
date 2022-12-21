@@ -16,7 +16,7 @@ interface icomments {
     @param ip  string   for abuse purposes
     @param postid number   which post to resolve comments
 */
-export default async function resolveComments(uid: string, ipaddr: string, postid: number) {
+export default async function resolveComments(uid: string,  postid: number, ipaddr: string,) {
     if (uid === undefined) return null;
     const theaccount: iuserauth = await db.userauth.findOne({
         where: {

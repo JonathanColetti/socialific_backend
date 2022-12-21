@@ -20,18 +20,18 @@ export interface irating {
 
 // inst hashmaps 
 export let ratinghashmap: iratings = {};
-let htagratings: Map<number, number> = new Map<number, number>();
-let hmediatyperatings: Map<number, number> = new Map<number, number>();
-let hprofileratings: Map<number, number> = new Map<number, number>();
-let hsoundratings: Map<number, number> = new Map<number, number>();
-let hhistory: Map<number, number> = new Map<number, number>();
-ratinghashmap["uid"] = {
-    tratings: htagratings,
-    mtratings: hmediatyperatings,
-    pratings: hprofileratings,
-    sratings: hsoundratings,
-    history: hhistory
-}
+// let htagratings: Map<number, number> = new Map<number, number>();
+// let hmediatyperatings: Map<number, number> = new Map<number, number>();
+// let hprofileratings: Map<number, number> = new Map<number, number>();
+// let hsoundratings: Map<number, number> = new Map<number, number>();
+// let hhistory: Map<number, number> = new Map<number, number>();
+// ratinghashmap["uid"] = {
+//     tratings: htagratings,
+//     mtratings: hmediatyperatings,
+//     pratings: hprofileratings,
+//     sratings: hsoundratings,
+//     history: hhistory
+// }
 
 // Rebuild hashmap. Ran when the server is reran 
 export const loadhashmap = async () => {

@@ -1,32 +1,34 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('soundratings', {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+  return sequelize.define('replies', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    auid: {
+    cmtid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'userauth',
+        model: 'comments',
         key: 'id'
       }
     },
-    sndid: {
+    pid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'sounds',
+        model: 'profiles',
         key: 'id'
       }
     },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 1600
+    comment: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    commentlnk: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     },
     time_created: {
       type: DataTypes.DATE,
@@ -40,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'soundratings',
+    tableName: 'replies',
     timestamps: false,
     indexes: [
       {
@@ -52,17 +54,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "sndid",
+        name: "pid",
         using: "BTREE",
         fields: [
-          { name: "sndid" },
+          { name: "pid" },
         ]
       },
       {
-        name: "auid",
+        name: "cmtid",
         using: "BTREE",
         fields: [
-          { name: "auid" },
+          { name: "cmtid" },
         ]
       },
     ]

@@ -20,7 +20,7 @@ interface iprofiles {
 // find profiles based on variables
 //  a. check if id or username is set and get profiles based on that
 //  b. default is most popular creators / creators they would like 
-export default async function resolveProfiles(username: string, id: number): Promise<any> {
+export default async function resolveProfiles(uid: string, username: string, id: number): Promise<any> {
     /* 
     TODO
         - Improve fuzzysearch alg

@@ -1,34 +1,31 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('replies', {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+  return sequelize.define('tagratings', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    cmtid: {
+    tagid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'comments',
+        model: 'tags',
         key: 'id'
       }
     },
-    pid: {
+    auid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'profiles',
+        model: 'userauth',
         key: 'id'
       }
     },
-    comment: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    commentlnk: {
-      type: DataTypes.STRING(100),
-      allowNull: true
+    score: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 1600
     },
     time_created: {
       type: DataTypes.DATE,
@@ -42,7 +39,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     }
   }, {
     sequelize,
-    tableName: 'replies',
+    tableName: 'tagratings',
     timestamps: false,
     indexes: [
       {
@@ -54,17 +51,17 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "pid",
+        name: "tagid",
         using: "BTREE",
         fields: [
-          { name: "pid" },
+          { name: "tagid" },
         ]
       },
       {
-        name: "cmtid",
+        name: "auid",
         using: "BTREE",
         fields: [
-          { name: "cmtid" },
+          { name: "auid" },
         ]
       },
     ]

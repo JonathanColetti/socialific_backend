@@ -1,6 +1,6 @@
 import {Sequelize} from 'sequelize'; 
 
-export default function Profiles(sequelize, DataTypes) {
+export default function Profiles(sequelize:any, DataTypes: any) {
   return sequelize.define('profiles', {
     id: {
       autoIncrement: true,

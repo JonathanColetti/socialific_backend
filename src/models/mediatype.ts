@@ -1,23 +1,14 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('tags', {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+  return sequelize.define('mediatype', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    tagname: {
-      type: DataTypes.STRING(50),
+    category: {
+      type: DataTypes.STRING(20),
       allowNull: false
-    },
-    pstid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'posts',
-        key: 'id'
-      }
     },
     time_created: {
       type: DataTypes.DATE,
@@ -31,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'tags',
+    tableName: 'mediatype',
     timestamps: false,
     indexes: [
       {
@@ -40,13 +31,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
-        ]
-      },
-      {
-        name: "pstid",
-        using: "BTREE",
-        fields: [
-          { name: "pstid" },
         ]
       },
     ]

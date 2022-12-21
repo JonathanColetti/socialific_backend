@@ -1,26 +1,26 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('posttags', {
-    postid: {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+  return sequelize.define('replylikes', {
+    profileid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'posts',
+        model: 'profiles',
         key: 'id'
       }
     },
-    tagid: {
+    rplyid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'tags',
+        model: 'replies',
         key: 'id'
       }
     }
   }, {
     sequelize,
-    tableName: 'posttags',
+    tableName: 'replylikes',
     timestamps: false,
     indexes: [
       {
@@ -28,15 +28,15 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "postid" },
-          { name: "tagid" },
+          { name: "profileid" },
+          { name: "rplyid" },
         ]
       },
       {
-        name: "tagid",
+        name: "rplyid",
         using: "BTREE",
         fields: [
-          { name: "tagid" },
+          { name: "rplyid" },
         ]
       },
     ]

@@ -2,9 +2,9 @@
   "name": "backend_highlightit",
   "version": "1.0.0",
   "description": "A MySQL Graphql backend server for my open sourced app",
-  "main": "index.js",
+  "main": "index.ts",
   "type": "module",
-  "exports": "./dist/index.js",
+  "exports": "./dist/index.ts",
   "scripts": {
     "dev:server": "nodemon --watch './src/**/*' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"

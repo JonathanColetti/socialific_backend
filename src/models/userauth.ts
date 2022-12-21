@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize'; 
-export default function(sequelize, DataTypes) {
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('userauth', {
     id: {
       type: DataTypes.INTEGER,

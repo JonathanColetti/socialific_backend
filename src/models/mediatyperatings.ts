@@ -1,6 +1,7 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('posts', {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+  return sequelize.define('mediatyperatings', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -13,30 +14,18 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         key: 'id'
       }
     },
-    pid: {
+    auid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'profiles',
+        model: 'userauth',
         key: 'id'
       }
     },
-    caption: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    medialnk: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    plocation: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    pinned: {
-      type: DataTypes.TINYINT,
+    score: {
+      type: DataTypes.INTEGER,
       allowNull: true,
-      defaultValue: 0
+      defaultValue: 1600
     },
     time_created: {
       type: DataTypes.DATE,
@@ -50,7 +39,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     }
   }, {
     sequelize,
-    tableName: 'posts',
+    tableName: 'mediatyperatings',
     timestamps: false,
     indexes: [
       {
@@ -69,10 +58,10 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "pid",
+        name: "auid",
         using: "BTREE",
         fields: [
-          { name: "pid" },
+          { name: "auid" },
         ]
       },
     ]

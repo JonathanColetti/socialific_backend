@@ -1,12 +1,20 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('comments', {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+  return sequelize.define('history', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    postid: {
+    pid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'profiles',
+        key: 'id'
+      }
+    },
+    vid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -14,17 +22,15 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         key: 'id'
       }
     },
-    pid: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    clicked: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      defaultValue: 0
     },
-    comment: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    commentlnk: {
-      type: DataTypes.STRING(100),
-      allowNull: true
+    rewatched: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      defaultValue: 0
     },
     time_created: {
       type: DataTypes.DATE,
@@ -38,7 +44,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     }
   }, {
     sequelize,
-    tableName: 'comments',
+    tableName: 'history',
     timestamps: false,
     indexes: [
       {
@@ -50,10 +56,17 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "postid",
+        name: "pid",
         using: "BTREE",
         fields: [
-          { name: "postid" },
+          { name: "pid" },
+        ]
+      },
+      {
+        name: "vid",
+        using: "BTREE",
+        fields: [
+          { name: "vid" },
         ]
       },
     ]

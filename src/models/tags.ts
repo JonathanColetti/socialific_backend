@@ -1,4 +1,4 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('tags', {
     id: {
       autoIncrement: true,

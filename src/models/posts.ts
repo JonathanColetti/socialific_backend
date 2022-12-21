@@ -1,31 +1,42 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize, DataTypes) {
-  return sequelize.define('tagratings', {
+import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+  return sequelize.define('posts', {
     id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    tagid: {
+    ctid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'tags',
+        model: 'mediatype',
         key: 'id'
       }
     },
-    auid: {
+    pid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'userauth',
+        model: 'profiles',
         key: 'id'
       }
     },
-    score: {
-      type: DataTypes.INTEGER,
+    caption: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    medialnk: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    plocation: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
+    pinned: {
+      type: DataTypes.TINYINT,
       allowNull: true,
-      defaultValue: 1600
+      defaultValue: 0
     },
     time_created: {
       type: DataTypes.DATE,
@@ -39,7 +50,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
     }
   }, {
     sequelize,
-    tableName: 'tagratings',
+    tableName: 'posts',
     timestamps: false,
     indexes: [
       {
@@ -51,17 +62,17 @@ import {Sequelize} from 'sequelize'; export default function(sequelize, DataType
         ]
       },
       {
-        name: "tagid",
+        name: "ctid",
         using: "BTREE",
         fields: [
-          { name: "tagid" },
+          { name: "ctid" },
         ]
       },
       {
-        name: "auid",
+        name: "pid",
         using: "BTREE",
         fields: [
-          { name: "auid" },
+          { name: "pid" },
         ]
       },
     ]
