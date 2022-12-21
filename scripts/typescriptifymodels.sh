@@ -1,8 +1,9 @@
+#!/bin/bash
 # typescriptify the models that sequelize cli generates 
 
 CMD=$(cd /Users/famcoletti/Documents/projects/socialific_backend/src/models && ls -p | grep -v /)
 for file in $CMD
- do
+ do # for now
     if [ $file != "init-models.js" ];
     then
         sed -i "" 's/sequelize, DataTypes/sequelize:any, DataTypes: any/g' /Users/famcoletti/Documents/projects/socialific_backend/src/models/$file
