@@ -30,5 +30,5 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.listen(port, () => {
-  console.log(`🚀 server started at http://localhost:${port}`)
+  console.log(`🚀 server started at http://localhost:${port} on ${new Date()}`)
 })

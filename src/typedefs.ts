@@ -29,6 +29,15 @@ const typeDefs: DocumentNode = gql`
     input ProfileInput {
         username: String
         propic: String
+        bg: String
+        stickers: String
+        cmntstickers: String
+        border: String
+        uid: String
+        name: String
+        font: String
+        location: String
+        bio: String
     }
     input CommentInput {
         postid: Int

@@ -123,9 +123,8 @@ CREATE TABLE history(
 
 CREATE TABLE reports(
     id int NOT NULL AUTO_INCREMENT,
-    pid int NOT NULL,
-    rnum int NOT NULL,
-    extrainfo varchar(50),
+    severity int,
+    info varchar(300),
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (pid) REFERENCES profiles(id),

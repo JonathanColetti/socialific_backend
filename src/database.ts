@@ -10,6 +10,7 @@ import userratings from './models/userratings.js';
 import soundratings from './models/soundratings.js';
 import mediatyperatings from './models/mediatyperatings.js';
 import comments from './models/comments.js';
+import reports from './models/reports.js';
 
 
 dotenv.config()
@@ -27,6 +28,7 @@ let models: Array<Function> = [
     userratings,
     soundratings,
     mediatyperatings,
+    reports
 ]
 export const sequelize = new Sequelize(
     process.env.DB!,
