@@ -20,6 +20,8 @@ const typeDefs = `
         birthday: String
     }
     input PostsInput {
+        uid: String
+        ctid: Int
         medialnk: String
         caption: String
         plocation: String
@@ -39,6 +41,7 @@ const typeDefs = `
         bio: String
     }
     input CommentInput {
+        uid: String
         postid: Int
         comment: String
         commentlnk: String
@@ -78,7 +81,6 @@ const typeDefs = `
     type Posts {
         id: ID!
         ctid: Int
-        pid: Int
         caption: String
         medialnk: String
         plocation: String

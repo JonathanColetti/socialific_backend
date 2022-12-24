@@ -4,12 +4,8 @@ import { Irepoting } from "../lib/util/interfaces/reports";
 import { AuthError, MissingError } from "../reporting/rdb";
 
 import { iuserauth } from "../resolvers/ruserauth";
-import profiles from "../models/profiles"
-import { verify } from "crypto";
-import verifyip from "../lib/util/verification/checkip";
-import { GraphQLError } from "graphql";
-import {ApolloServerErrorCode} from "@apollo/server/errors"
 import { iprofiles } from "../resolvers/rprofiles";
+import checkvalid from "../lib/util/verification/checkvalid";
 /* Make a profile using muations
     - 
     @param arguments    IProfileInput
@@ -17,8 +13,8 @@ import { iprofiles } from "../resolvers/rprofiles";
 export default async function mprofile( _arguments: IProfileInput, ip: string ) {
 
 
-    if (_arguments.uid === undefined || _arguments.username === undefined || _arguments.propic === undefined
-        || _arguments.bio === undefined) {
+    if ( checkvalid(_arguments.uid) ||  checkvalid(_arguments.username) || checkvalid(_arguments.propic)
+        || checkvalid(_arguments.bio)) {
         // report and return null
         const report: Irepoting = {
             ip: ip,
@@ -41,7 +37,7 @@ export default async function mprofile( _arguments: IProfileInput, ip: string ) 
     const createdaccount: iprofiles = db.profiles.create({
         username: _arguments.username,
         bio: _arguments.bio,
-        rname: _arguments
+        rname: _arguments.rname
 
     }).catch((err: any) => {
         // handle

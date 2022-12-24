@@ -7,7 +7,6 @@ export interface IPostsInput extends Input {
     medialnk: string
     plocation: string
     soundid: number
-    pid: number
     ctid: number
 
 }

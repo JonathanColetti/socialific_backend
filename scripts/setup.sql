@@ -55,7 +55,7 @@ CREATE TABLE sounds(
     PRIMARY KEY (id)
 );
 CREATE TABLE posts(
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     ctid int NOT NULL,
     auid int NOT NULL,
     soundid int,

@@ -29,7 +29,7 @@ export default async function muserauth(_arguments: IUauthInput, ip: string) {
     if (_arguments.phonenum !== undefined) {}
     if (_arguments.email !== undefined) {}
     
-    const createdua: iuserauth = await db.userauth.create({
+    const createdua: iuserauth = db.userauth.create({
         userid: uuidv4(),
         password: _arguments.password,
         birthday: _arguments.birthday,

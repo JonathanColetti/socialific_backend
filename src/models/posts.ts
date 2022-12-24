@@ -2,6 +2,7 @@ import {Sequelize, DataTypes} from 'sequelize';
 export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('posts', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
