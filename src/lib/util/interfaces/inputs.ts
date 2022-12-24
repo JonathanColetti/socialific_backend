@@ -14,6 +14,7 @@ export interface IPostsInput extends Input {
 
 export interface IProfileInput extends Input {
     username: string
+    rname: string
     propic: string
     bg: string 
     bio: string

@@ -1,7 +1,5 @@
-import { gql } from "apollo-server-express";
-import { DocumentNode } from "graphql";
 
-const typeDefs: DocumentNode = gql`
+const typeDefs = `
     type Query {
         profiles(username: String, id: ID): [Profile]
         userauth(userid: String, phonenum: String, email: String, userpass: String): Userauth
@@ -9,8 +7,8 @@ const typeDefs: DocumentNode = gql`
         Comments(uid: String, postid: Int): [Comments]
     }
     type Mutation {
-        cuserauth(input: UserAuthInput): Userauth
-        cprofile(input: ProfileInput): Profile
+        cuserauth(input: UserAuthInput): UserauthWErr
+        cprofile(input: ProfileInput): ProfileWErr
         cpost(input: PostsInput): Posts 
         ccomment(input: CommentInput): Comments
     }
@@ -28,6 +26,7 @@ const typeDefs: DocumentNode = gql`
     }
     input ProfileInput {
         username: String
+        rname: String
         propic: String
         bg: String
         stickers: String
@@ -44,6 +43,7 @@ const typeDefs: DocumentNode = gql`
         comment: String
         commentlnk: String
     }
+    
     type Userauth {
         id: ID!
         userid: String
@@ -127,6 +127,15 @@ const typeDefs: DocumentNode = gql`
         time_created: String
         time_updated: String
     }
+    type UserauthWErr {
+        state: String!
+        userauth: Userauth
+    }
+    type ProfileWErr {
+        state: String!
+        profile: Profile
+    }
+
     
 `
 

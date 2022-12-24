@@ -1,34 +1,25 @@
 import express, { Request, Response } from 'express'
-import { ApolloServer, Config, ExpressContext, gql } from 'apollo-server-express';
+import { ApolloServer} from '@apollo/server';
 import typeDefs from './typedefs';
+import { startStandaloneServer } from '@apollo/server/standalone';
 import resolvers from './resolvers/resolvers';
-import { createContext } from './context';
 import requestIp from "request-ip";
 import { loadhashmap } from './lib/datastructures/hashmap';
-
+import { ApolloServerPluginUsageReporting } from "@apollo/server/plugin/usageReporting"
 // express server configuration
 
-const app = express()
-app.use(requestIp.mw());
-const port: number = 5100;
-
+await loadhashmap()
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: createContext
+    formatError(formattedError, error) {
+        return formattedError
+    },
+    
 });
 
-
-await server.start()
-server.applyMiddleware({app})
-
-// load hashmap from database
-await loadhashmap()
-// setup routes,
-app.get('/', (req: Request, res: Response) => {
-  res.json({ greeting: 'Welcome to our server. Want a job? Send resumes to jonathancoletti@highlightit.biz' })
+const {url} = await startStandaloneServer(server, {
+  context: async ({req}) => ({ request: req }),
+  listen: {port: 5100}
 })
-
-app.listen(port, () => {
-  console.log(`🚀 server started at http://localhost:${port} on ${new Date()}`)
-})
+console.log(`${url} on ${new Date}`)

@@ -3,7 +3,7 @@ CREATE DATABASE socialific;
 USE socialific;
 
 CREATE TABLE userauth(
-    id int NOT NULL, 
+    id int NOT NULL AUTO_INCREMENT, 
     userid varchar(100) NOT NULL UNIQUE,  
     phonenum VARCHAR(20) NOT NULL,
     gender VARCHAR(1) NOT NULL,

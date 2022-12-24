@@ -1,7 +1,7 @@
 import db from "../database";
 import fuzzymatch from "../lib/util/algorithms/fuzzymatch";
 
-interface iprofiles {
+export interface iprofiles {
     id: number,
     username: string,
     propic: string,
