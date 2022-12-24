@@ -1,6 +1,5 @@
-import {Sequelize} from 'sequelize'; 
-
-export default function Profiles(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('profiles', {
     id: {
       autoIncrement: true,
@@ -26,6 +25,10 @@ export default function Profiles(sequelize:any, DataTypes: any) {
       allowNull: true
     },
     stickers: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    cmntstickers: {
       type: DataTypes.STRING(500),
       allowNull: true
     },
