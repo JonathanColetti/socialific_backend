@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('comments', {
     id: {
       autoIncrement: true,
@@ -16,7 +17,11 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
     },
     pid: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'profiles',
+        key: 'id'
+      }
     },
     comment: {
       type: DataTypes.STRING(100),
@@ -54,6 +59,13 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
         using: "BTREE",
         fields: [
           { name: "postid" },
+        ]
+      },
+      {
+        name: "pid",
+        using: "BTREE",
+        fields: [
+          { name: "pid" },
         ]
       },
     ]

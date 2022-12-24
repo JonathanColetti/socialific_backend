@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('replylikes', {
     profileid: {
       type: DataTypes.INTEGER,
@@ -17,6 +18,11 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
         model: 'replies',
         key: 'id'
       }
+    },
+    time_created: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

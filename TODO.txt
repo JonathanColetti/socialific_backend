@@ -1,3 +1,4 @@
 - Merge last js file to ts
 - Create all mutations based on tables, and finish resolvers
 - Add two step auth 
+- Handle errors

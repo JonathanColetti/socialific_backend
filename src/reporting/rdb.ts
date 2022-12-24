@@ -18,7 +18,6 @@ export const MissingError = async (_arguments: Irepoting):Promise<boolean> => {
         severity: _arguments.severity,
         info: `${_arguments.ip} has missed crucial args on ${_arguments.filename}, trace: ${_arguments.values}`,
         pid: 0,
-        rnum: 0
     })
     return true
 }

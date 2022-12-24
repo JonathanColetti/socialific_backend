@@ -1,6 +1,6 @@
 import {Sequelize, DataTypes} from 'sequelize';
 export default function(sequelize:any, DataTypes: any) {
-  return sequelize.define('postlikes', {
+  return sequelize.define('commentlikes', {
     profileid: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -10,12 +10,12 @@ export default function(sequelize:any, DataTypes: any) {
         key: 'id'
       }
     },
-    postid: {
+    cmtid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'posts',
+        model: 'comments',
         key: 'id'
       }
     },
@@ -26,7 +26,7 @@ export default function(sequelize:any, DataTypes: any) {
     }
   }, {
     sequelize,
-    tableName: 'postlikes',
+    tableName: 'commentlikes',
     timestamps: false,
     indexes: [
       {
@@ -35,14 +35,14 @@ export default function(sequelize:any, DataTypes: any) {
         using: "BTREE",
         fields: [
           { name: "profileid" },
-          { name: "postid" },
+          { name: "cmtid" },
         ]
       },
       {
-        name: "postid",
+        name: "cmtid",
         using: "BTREE",
         fields: [
-          { name: "postid" },
+          { name: "cmtid" },
         ]
       },
     ]

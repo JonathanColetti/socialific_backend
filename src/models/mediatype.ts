@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('mediatype', {
     id: {
       autoIncrement: true,
@@ -13,12 +14,12 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
     time_created: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize!.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     },
     time_updated: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize!.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

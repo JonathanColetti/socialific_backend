@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('posts', {
     id: {
       type: DataTypes.INTEGER,
@@ -18,6 +19,14 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
       allowNull: false,
       references: {
         model: 'profiles',
+        key: 'id'
+      }
+    },
+    soundid: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'sounds',
         key: 'id'
       }
     },
@@ -59,6 +68,13 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "soundid",
+        using: "BTREE",
+        fields: [
+          { name: "soundid" },
         ]
       },
       {

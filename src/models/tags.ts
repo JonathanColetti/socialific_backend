@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('tags', {
     id: {
       autoIncrement: true,
@@ -9,6 +10,14 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
     tagname: {
       type: DataTypes.STRING(50),
       allowNull: false
+    },
+    pstid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'posts',
+        key: 'id'
+      }
     },
     time_created: {
       type: DataTypes.DATE,
@@ -31,6 +40,13 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "pstid",
+        using: "BTREE",
+        fields: [
+          { name: "pstid" },
         ]
       },
     ]

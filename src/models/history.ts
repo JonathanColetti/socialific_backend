@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('history', {
     id: {
       autoIncrement: true,
@@ -22,15 +23,10 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
         key: 'id'
       }
     },
-    clicked: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 0
-    },
-    rewatched: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 0
+    score: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1600
     },
     time_created: {
       type: DataTypes.DATE,

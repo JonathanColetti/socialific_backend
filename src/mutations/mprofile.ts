@@ -24,6 +24,7 @@ export default async function mprofile( _arguments: IProfileInput, ip: string ) 
             ip: ip,
             severity: 0,
             filename: 'mprofile',
+            pid: 0,
             values: _arguments
         }
         await MissingError(report)

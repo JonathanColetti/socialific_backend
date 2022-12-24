@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('userratings', {
     id: {
       autoIncrement: true,
@@ -58,7 +59,7 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
         ]
       },
       {
-        name: "uauth",
+        name: "auid",
         using: "BTREE",
         fields: [
           { name: "auid" },

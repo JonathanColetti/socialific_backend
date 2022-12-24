@@ -3,6 +3,7 @@ export interface Irepoting {
     severity: number
     filename: string
     values: any
+    pid: number
 }
 
 

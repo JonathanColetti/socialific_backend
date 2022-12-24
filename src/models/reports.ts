@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('reports', {
     id: {
       autoIncrement: true,
@@ -6,21 +7,31 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
       allowNull: false,
       primaryKey: true
     },
+    severity: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    info: {
+      type: DataTypes.STRING(300),
+      allowNull: true
+    },
     pid: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'profiles',
         key: 'id'
       }
     },
-    rnum: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    time_created: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     },
-    extrainfo: {
-      type: DataTypes.STRING(50),
-      allowNull: true
+    time_updated: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

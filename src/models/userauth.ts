@@ -1,7 +1,8 @@
-import {Sequelize} from 'sequelize'; 
+import {Sequelize, DataTypes} from 'sequelize';
 export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('userauth', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -36,14 +37,14 @@ export default function(sequelize:any, DataTypes: any) {
       allowNull: true,
       defaultValue: 1
     },
+    birthday: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
     lastlgn: {
       type: DataTypes.DATE,
       allowNull: true,
       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    birthday: {
-      type: DataTypes.DATE,
-      allowNull: false, 
     },
     time_created: {
       type: DataTypes.DATE,

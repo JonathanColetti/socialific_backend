@@ -1,4 +1,5 @@
-import {Sequelize} from 'sequelize'; export default function(sequelize:any, DataTypes: any) {
+import {Sequelize, DataTypes} from 'sequelize';
+export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('posttags', {
     postid: {
       type: DataTypes.INTEGER,
@@ -17,6 +18,11 @@ import {Sequelize} from 'sequelize'; export default function(sequelize:any, Data
         model: 'tags',
         key: 'id'
       }
+    },
+    time_created: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

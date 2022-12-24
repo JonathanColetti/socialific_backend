@@ -125,6 +125,7 @@ CREATE TABLE reports(
     id int NOT NULL AUTO_INCREMENT,
     severity int,
     info varchar(300),
+    pid int,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (pid) REFERENCES profiles(id),
