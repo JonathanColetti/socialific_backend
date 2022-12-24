@@ -15,11 +15,11 @@ export default function(sequelize:any, DataTypes: any) {
       type: DataTypes.STRING(300),
       allowNull: true
     },
-    pid: {
+    auid: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'profiles',
+        model: 'userauth',
         key: 'id'
       }
     },
@@ -47,10 +47,10 @@ export default function(sequelize:any, DataTypes: any) {
         ]
       },
       {
-        name: "pid",
+        name: "auid",
         using: "BTREE",
         fields: [
-          { name: "pid" },
+          { name: "auid" },
         ]
       },
     ]

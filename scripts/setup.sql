@@ -48,16 +48,16 @@ CREATE TABLE mediatype(
 CREATE TABLE sounds(
     id int NOT NULL AUTO_INCREMENT,
     soundlnk varchar(300) NOT NULL,
-    pid int,
+    auid int,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (pid) REFERENCES profiles(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     PRIMARY KEY (id)
 );
 CREATE TABLE posts(
     id int NOT NULL,
     ctid int NOT NULL,
-    pid int NOT NULL,
+    auid int NOT NULL,
     soundid int,
     caption varchar(100),
     medialnk varchar(500),
@@ -67,7 +67,7 @@ CREATE TABLE posts(
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (soundid) REFERENCES sounds(id),
     FOREIGN KEY (ctid) REFERENCES mediatype(id),
-    FOREIGN KEY (pid) REFERENCES profiles(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     PRIMARY KEY (id)
 );
 
@@ -81,7 +81,6 @@ CREATE TABLE tags(
     PRIMARY KEY (id)
 );
 
--- auid so we have to only fetch once 
 CREATE TABLE comments(
     id int NOT NULL AUTO_INCREMENT,
     postid int NOT NULL,
@@ -98,24 +97,24 @@ CREATE TABLE comments(
 CREATE TABLE replies(
     id int NOT NULL AUTO_INCREMENT,
     cmtid int NOT NULL,
-    pid int NOT NULL,
+    auid int NOT NULL,
     comment varchar(100),
     commentlnk varchar(100),
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (pid) REFERENCES profiles(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     FOREIGN KEY (cmtid) REFERENCES comments(id),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE history(
     id int NOT NULL AUTO_INCREMENT,
-    pid int NOT NULL,
+    auid int NOT NULL,
     vid int NOT NULL,
     score int NOT NULL DEFAULT 1600, 
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (pid) REFERENCES profiles(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     FOREIGN KEY (vid) REFERENCES posts(id),
     PRIMARY KEY (id)
 
@@ -126,10 +125,10 @@ CREATE TABLE reports(
     id int NOT NULL AUTO_INCREMENT,
     severity int,
     info varchar(300),
-    pid int,
+    auid int,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (pid) REFERENCES profiles(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     PRIMARY KEY(id)
 );
 
