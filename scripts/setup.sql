@@ -81,16 +81,17 @@ CREATE TABLE tags(
     PRIMARY KEY (id)
 );
 
+-- auid so we have to only fetch once 
 CREATE TABLE comments(
     id int NOT NULL AUTO_INCREMENT,
     postid int NOT NULL,
-    pid int NOT NULL,
+    auid int NOT NULL,
     comment varchar(100),
     commentlnk varchar(100),
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (postid) REFERENCES posts(id),
-    FOREIGN KEY (pid) REFERENCES profiles(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     PRIMARY KEY (id)
 );
 

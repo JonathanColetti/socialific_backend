@@ -2,3 +2,4 @@
 - Create all mutations based on tables, and finish resolvers
 - Add two step auth 
 - Handle errors
+- All PIDs to AUIDs in sql setup

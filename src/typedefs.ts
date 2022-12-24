@@ -9,8 +9,8 @@ const typeDefs = `
     type Mutation {
         cuserauth(input: UserAuthInput): UserauthWErr
         cprofile(input: ProfileInput): ProfileWErr
-        cpost(input: PostsInput): Posts 
-        ccomment(input: CommentInput): Comments
+        cpost(input: PostsInput): PostsWErr
+        ccomment(input: CommentInput): CommentsWErr
     }
     input UserAuthInput {
         phonenum: String
@@ -134,6 +134,14 @@ const typeDefs = `
     type ProfileWErr {
         state: String!
         profile: Profile
+    }
+    type PostsWErr {
+        state: String!
+        post: Posts
+    }
+    type CommentsWErr {
+        state: String!
+        comment: Comments
     }
 
     

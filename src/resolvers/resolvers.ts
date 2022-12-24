@@ -35,7 +35,7 @@ const resolvers = {
         cpost: async (_parent: any, args: {input:{uid: string, caption: string, medialnk: string, plocation: string, ctid: number, soundid: number, pid: number }}, context: any, _info: any) => {
             return await mpost(args.input, context.request.connection.remoteAddress)
         },
-        ccomment: async (_parent: any, args: {input:{uid: string, comment: string, medialnk:string}}, context: any, _info: any) => {
+        ccomment: async (_parent: any, args: {input:{uid: string, comment: string, medialnk:string, post: number}}, context: any, _info: any) => {
             return await mcomments(args.input, context.request.connection.remoteAddress)
         },
     },
