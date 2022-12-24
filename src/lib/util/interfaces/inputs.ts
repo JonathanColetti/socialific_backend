@@ -35,6 +35,7 @@ export interface IUauthInput extends Input {
 }
 
 export interface ICommentsInput extends Input {
+    post: number
     comment: string
     medialnk: string
 }
