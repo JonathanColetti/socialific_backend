@@ -1,7 +1,8 @@
-- Merge last js file to ts
+- Merge last js file to ts in script
 - Create all mutations based on tables, and finish resolvers
 - Add two step auth 
 - Handle all errors
 - Add return types from functions
 - Keyword extractor to other languages besides english
 - Implement google translate 
+- Clean code

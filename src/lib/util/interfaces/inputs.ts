@@ -28,10 +28,10 @@ export interface IProfileInput extends Input {
 
 export interface IUauthInput extends Input {
     birthday: string
-    email: string | undefined
+    email: string 
     gender: string
     password: string
-    phonenum: string | undefined
+    phonenum: string 
 }
 
 export interface ICommentsInput extends Input {

@@ -4,6 +4,16 @@ import { Irepoting } from "../lib/util/interfaces/reports";
 import { MissingError } from "../reporting/rdb";
 import { iuserauth } from "../resolvers/ruserauth";
 
+
+
+/*
+Make a comment
+    a. check validity of args / report
+    b. catch error 
+TODO
+    - 2fa 
+    
+*/
 export default async function mcomments(_arguments: ICommentsInput, ip: string) {
 
     if (_arguments.uid === undefined || _arguments.comment === undefined || _arguments.post === undefined) {

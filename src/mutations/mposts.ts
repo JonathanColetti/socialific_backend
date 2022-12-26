@@ -7,6 +7,18 @@ import { iuserauth } from "../resolvers/ruserauth";
 import mmediatype from "./mmediatype";
 import keyword_extractor from "keyword-extractor";
 
+
+/*
+Make a post on server
+    a. check validity of args / report
+    b. create the post
+    c. if post is for everyone extract keyword from title else dont
+    d. if post is everyone add relationships
+TODO 
+    a. tfa
+    b. check ip
+    c. make relation ships 
+*/
 export default async function mpost(_arguments: IPostsInput, ip: string) {
     if ((!checkvalid(_arguments.uid)) && (!checkvalid(_arguments.caption) || !checkvalid(_arguments.medialnk)) ) {
         const report: Irepoting = {
@@ -36,11 +48,10 @@ export default async function mpost(_arguments: IPostsInput, ip: string) {
         medialnk: _arguments.medialnk,
         whosees: _arguments.whosees
     }).catch((err: any) => {
-        console.log(err)
         return {state: err.message, post: null}
     })
     if (_arguments.whosees !== "all") {
-        
+        return {state: "sucess", post: thepost}        
     }
     const keywords: string[] = keyword_extractor.extract(_arguments.caption, {
         language: "english",
@@ -55,7 +66,6 @@ export default async function mpost(_arguments: IPostsInput, ip: string) {
         await mmediatype({uid: _arguments.uid, name: element}, ip);
         
     });
-
     return {
         state: "Sucess",
         post: thepost
