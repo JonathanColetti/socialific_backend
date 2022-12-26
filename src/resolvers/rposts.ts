@@ -3,16 +3,7 @@ import {iuserauth} from "./ruserauth";
 import { ratinghashmap } from "../lib/datastructures/hashmap";
 import verifyip from "../lib/util/verification/checkip";
 import { RankingPosts } from "../lib/util/algorithms/rankingposts";
-interface iposts {
-    id: number,
-    ctid: number,
-    pid: number,
-    caption: string,
-    medialnk: string,
-    plocation: string,
-    pinned: number
 
-}
 
 // TODO
 //  - Write interfaces for ratings

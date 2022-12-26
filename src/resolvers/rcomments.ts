@@ -1,16 +1,9 @@
 import db, { sequelize } from "../database";
+import { icomments } from "../lib/util/interfaces/tables";
 import verifyip from "../lib/util/verification/checkip";
 import { iuserauth } from "./ruserauth";
 
-interface icomments {
-    id: number,
-    postid: number,
-    pid: number,
-    comment: string,
-    commentlnk: string,
-    time_created: string,
-    time_updated: string,
-}
+
 /* Resolve comments in a post
     @param uid string   for scoring and abuse purposes
     @param ip  string   for abuse purposes
