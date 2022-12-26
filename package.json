@@ -26,6 +26,7 @@
     "dotenv": "^16.0.3",
     "geoip-lite": "^1.4.6",
     "graphql": "^16.6.0",
+    "keyword-extractor": "^0.0.23",
     "mysql2": "^2.3.3",
     "sequelize": "^6.25.3",
     "uuid": "^9.0.0"

@@ -1,5 +1,7 @@
 - Merge last js file to ts
 - Create all mutations based on tables, and finish resolvers
 - Add two step auth 
-- Handle errors
-- All PIDs to AUIDs in sql setup
+- Handle all errors
+- Add return types from functions
+- Keyword extractor to other languages besides english
+- Implement google translate 

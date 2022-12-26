@@ -32,7 +32,7 @@ const resolvers = {
             , context: any, _info: any) => {
             return await mprofile(args.input, context.request.connection.remoteAddress)
         },
-        cpost: async (_parent: any, args: {input:{uid: string, caption: string, medialnk: string, plocation: string, ctid: number, soundid: number,  }}, context: any, _info: any) => {
+        cpost: async (_parent: any, args: {input:{uid: string, caption: string, medialnk: string, plocation: string, ctid: number, soundid: number, whosees: string }}, context: any, _info: any) => {
             return await mpost(args.input, context.request.connection.remoteAddress)
         },
         ccomment: async (_parent: any, args: {input:{uid: string, comment: string, medialnk:string, post: number}}, context: any, _info: any) => {

@@ -23,6 +23,7 @@ CREATE TABLE profiles(
     username VARCHAR(25) NOT NULL UNIQUE,
     propic VARCHAR(500),
     bg VARCHAR(500),
+    lang VARCHAR(5)
     pubbg VARCHAR(500),
     stickers VARCHAR(500),
     cmntstickers VARCHAR(500),
@@ -40,7 +41,7 @@ CREATE TABLE profiles(
 
 CREATE TABLE mediatype(
     id int NOT NULL AUTO_INCREMENT,
-    category varchar(20) NOT NULL,
+    category varchar(20) NOT NULL UNIQUE,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
@@ -56,7 +57,6 @@ CREATE TABLE sounds(
 );
 CREATE TABLE posts(
     id int NOT NULL AUTO_INCREMENT,
-    ctid int NOT NULL,
     auid int NOT NULL,
     soundid int,
     caption varchar(100),
@@ -66,7 +66,6 @@ CREATE TABLE posts(
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (soundid) REFERENCES sounds(id),
-    FOREIGN KEY (ctid) REFERENCES mediatype(id),
     FOREIGN KEY (auid) REFERENCES userauth(id),
     PRIMARY KEY (id)
 );
@@ -234,3 +233,12 @@ CREATE TABLE profileviews(
     FOREIGN KEY (profileid) REFERENCES profiles(id),
     PRIMARY KEY (userauthid, profileid)
 );
+
+CREATE TABLE postmediatype (
+    postid int NOT NULL,
+    mediat int NOT NULL,
+    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (postid) REFERENCES posts(id),
+    FOREIGN KEY (mediat) REFERENCES mediatype(id),
+    PRIMARY KEY (postid, mediat)
+)

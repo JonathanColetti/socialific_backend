@@ -31,8 +31,8 @@ export default async function mprofile( _arguments: IProfileInput, ip: string ) 
             userid: _arguments.uid
         }
     })
-    // if (useracc.userid === undefined) {}
-    // if (!verifyip(ip, useracc)) return null
+    if (useracc.userid === undefined) return {state:"Non valid uid", profile: null}
+    // if (!verifyip(ip, useracc)) {}
 
     const createdaccount: iprofiles = db.profiles.create({
         username: _arguments.username,

@@ -24,6 +24,7 @@ let models: Array<Function> = [
     userauth,
     posts,
     comments,
+    mediatype,
     tagratings,
     userratings,
     soundratings,

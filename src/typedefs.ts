@@ -11,6 +11,7 @@ const typeDefs = `
         cprofile(input: ProfileInput): ProfileWErr
         cpost(input: PostsInput): PostsWErr
         ccomment(input: CommentInput): CommentsWErr
+        cmediatype(input: MediatypeInput): String
     }
     input UserAuthInput {
         phonenum: String
@@ -45,6 +46,9 @@ const typeDefs = `
         postid: Int
         comment: String
         commentlnk: String
+    }
+    input MediatypeInput {
+        comment: String 
     }
     
     type Userauth {
@@ -85,6 +89,7 @@ const typeDefs = `
         medialnk: String
         plocation: String
         pinned: Int
+        whosees: String
         time_created: String
         time_updated: String
     }

@@ -8,6 +8,7 @@ export interface IPostsInput extends Input {
     plocation: string
     soundid: number
     ctid: number
+    whosees: string
 
 }
 
@@ -37,4 +38,7 @@ export interface ICommentsInput extends Input {
     post: number
     comment: string
     medialnk: string
+}
+export interface IMediatype extends Input {
+    name: string
 }
