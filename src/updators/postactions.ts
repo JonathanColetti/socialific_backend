@@ -2,7 +2,7 @@ import db from "../database"
 import { Irepoting } from "../lib/util/interfaces/reports";
 import { MissingError } from "../reporting/rdb";
 
-export const likes: any = async (_arguments: { uid: string, postid: number }, ip: string, addorrm: string) => {
+export const postactions: any = async (_arguments: { uid: string, postid: number }, ip: string, addorrm: string): Promise<null | string> => {
     if (_arguments.uid === undefined && _arguments.postid === undefined ) {
         const report: Irepoting = {
             ip: ip,
@@ -27,8 +27,8 @@ export const likes: any = async (_arguments: { uid: string, postid: number }, ip
             postid: _arguments.postid
         }).catch((err: any) => {console.error(err)} )
         return "Sucess"
-    }
-    else {
+    } 
+    else if (addorrm === "rm") {
         const todelete = await db.postlikes.findOne({
             where: {
                 auid: theauth.id,
@@ -38,5 +38,12 @@ export const likes: any = async (_arguments: { uid: string, postid: number }, ip
         // console.log(todelete.destory())
         await todelete.destroy();
         return "Sucess"
+    } 
+    else {
+        await db.postviews.create({
+            auid: theauth.id,
+            postid: _arguments.postid,
+        }).catch((err: any) => console.error(err))
+        return "Sucess";
     }
 }

@@ -1,8 +1,8 @@
 import db, { sequelize } from "../database";
-import {iuserauth} from "./ruserauth";
 import { ratinghashmap } from "../lib/datastructures/hashmap";
 import verifyip from "../lib/util/verification/checkip";
 import { RankingPosts } from "../lib/util/algorithms/rankingposts";
+import { iuserauth } from "../lib/util/interfaces/tables";
 
 
 // TODO

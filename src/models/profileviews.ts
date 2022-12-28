@@ -1,7 +1,7 @@
 import {Sequelize, DataTypes} from 'sequelize';
 export default function(sequelize:any, DataTypes: any) {
   return sequelize.define('profileviews', {
-    userauthid: {
+    auid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -34,7 +34,7 @@ export default function(sequelize:any, DataTypes: any) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "userauthid" },
+          { name: "auid" },
           { name: "profileid" },
         ]
       },

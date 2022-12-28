@@ -3,6 +3,18 @@ interface itable {
     time_created: any,
     time_updated: any,
 }
+export interface iuserauth extends itable {
+    userid: string,
+    phonenum: string,
+    gender: string,
+    email: string,
+    userpass: string,
+    ipaddr: any,
+    coins: number,
+    lastlgn: any,
+    birthday: any,
+}
+
 
 export interface iprofiles extends itable {
     username: string,

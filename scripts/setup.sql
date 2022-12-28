@@ -21,7 +21,7 @@ CREATE TABLE userauth(
 CREATE TABLE profiles(
     id int NOT NULL AUTO_INCREMENT,
     username VARCHAR(25) NOT NULL UNIQUE,
-    ctid int NOT NULL,
+    auid int NOT NULL,
     propic VARCHAR(500),
     bg VARCHAR(500),
     lang VARCHAR(5),
@@ -37,6 +37,7 @@ CREATE TABLE profiles(
     slikes TINYINT DEFAULT 1,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     PRIMARY KEY (id)
 
 );
@@ -220,21 +221,30 @@ CREATE TABLE posttags(
 );
 
 CREATE TABLE profilelikes(
-    userauthid int NOT NULL,
+    auid int NOT NULL,
     profileid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (userauthid) REFERENCES userauth(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     FOREIGN KEY (profileid) REFERENCES profiles(id),
-    PRIMARY KEY (userauthid, profileid)
+    PRIMARY KEY (auid, profileid)
 );
 
 CREATE TABLE profileviews(
-    userauthid int NOT NULL,
+    auid int NOT NULL,
     profileid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (userauthid) REFERENCES userauth(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     FOREIGN KEY (profileid) REFERENCES profiles(id),
-    PRIMARY KEY (userauthid, profileid)
+    PRIMARY KEY (auid, profileid)
+);
+
+CREATE TABLE postviews(
+    auid int NOT NULL,
+    postid int NOT NULL,
+    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (auid) REFERENCES userauth(id),
+    FOREIGN KEY (postid) REFERENCES posts(id),
+    PRIMARY KEY (auid, postid)
 );
 
 CREATE TABLE postmediatype (

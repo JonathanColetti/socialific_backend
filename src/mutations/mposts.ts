@@ -3,9 +3,9 @@ import { IPostsInput } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports";
 import checkvalid from "../lib/util/verification/checkvalid";
 import { MissingError } from "../reporting/rdb";
-import { iuserauth } from "../resolvers/ruserauth";
 import mmediatype from "./mmediatype";
 import keyword_extractor from "keyword-extractor";
+import { iuserauth } from "../lib/util/interfaces/tables";
 
 
 /*

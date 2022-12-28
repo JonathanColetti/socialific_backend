@@ -16,6 +16,14 @@ export default function(sequelize:any, DataTypes: any) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    auid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'userauth',
+        key: 'id'
+      }
+    },
     propic: {
       type: DataTypes.STRING(500),
       allowNull: true
@@ -99,6 +107,13 @@ export default function(sequelize:any, DataTypes: any) {
         using: "BTREE",
         fields: [
           { name: "username" },
+        ]
+      },
+      {
+        name: "auid",
+        using: "BTREE",
+        fields: [
+          { name: "auid" },
         ]
       },
     ]

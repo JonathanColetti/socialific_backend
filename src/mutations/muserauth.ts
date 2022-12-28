@@ -3,8 +3,8 @@ import { IUauthInput } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports";
 import verifyip from "../lib/util/verification/checkip";
 import { MissingError } from "../reporting/rdb";
-import { iuserauth } from "../resolvers/ruserauth";
 import { v4 as uuidv4 } from "uuid";
+import { iuserauth } from "../lib/util/interfaces/tables";
 
 /*
     TODO

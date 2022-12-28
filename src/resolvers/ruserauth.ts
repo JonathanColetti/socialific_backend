@@ -1,20 +1,6 @@
 import db from "../database"
+import { iuserauth } from "../lib/util/interfaces/tables";
 import verifyip from "../lib/util/verification/checkip"
-
-export interface iuserauth {
-    id: number,
-    userid: string,
-    phonenum: string,
-    gender: string,
-    email: string,
-    userpass: string,
-    ipaddr: any,
-    coins: number,
-    lastlgn: any,
-    birthday: any,
-    time_created: any,
-    time_updated: any,
-}
 
 /* 
     TODO

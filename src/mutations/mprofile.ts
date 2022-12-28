@@ -3,8 +3,7 @@ import { IProfileInput } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports";
 import { AuthError, MissingError } from "../reporting/rdb";
 
-import { iuserauth } from "../resolvers/ruserauth";
-import { iprofiles } from "../lib/util/interfaces/tables";
+import { iprofiles, iuserauth } from "../lib/util/interfaces/tables";
 import checkvalid from "../lib/util/verification/checkvalid";
 /* 
 Make a profile using muations

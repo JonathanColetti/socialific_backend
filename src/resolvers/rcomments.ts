@@ -1,7 +1,6 @@
 import db, { sequelize } from "../database";
-import { icomments } from "../lib/util/interfaces/tables";
+import { icomments, iuserauth } from "../lib/util/interfaces/tables";
 import verifyip from "../lib/util/verification/checkip";
-import { iuserauth } from "./ruserauth";
 
 
 /* Resolve comments in a post
