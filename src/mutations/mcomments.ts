@@ -1,8 +1,8 @@
 import db from "../database";
 import { ICommentsInput } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports";
+import { iuserauth } from "../lib/util/interfaces/tables";
 import { MissingError } from "../reporting/rdb";
-import { iuserauth } from "../resolvers/ruserauth";
 
 
 

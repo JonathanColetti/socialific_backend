@@ -6,7 +6,8 @@ import muserauth from "../mutations/muserauth";
 import mprofile from "../mutations/mprofile";
 import mpost from "../mutations/mposts";
 import mcomments from "../mutations/mcomments";
-import { likes } from "../updators/likes";
+import { postactions } from "../updators/postactions";
+import { practions } from "../updators/practions";
 
 const resolvers = {
     /* Every query resolver must have parent, args, context, info */
@@ -39,12 +40,25 @@ const resolvers = {
         ccomment: async (_parent: any, args: {input:{uid: string, comment: string, medialnk:string, post: number}}, context: any, _info: any) => {
             return await mcomments(args.input, context.request.connection.remoteAddress)
         },
-        addlikes: async (_parent: any, args: {input: {uid: string, postid: number}}, context: any, _info: any) => {
-            return await likes(args.input, context.request.connection.remoteAddress, "add")
+        postlike: async (_parent: any, args: {input: {uid: string, postid: number}}, context: any, _info: any) => {
+            return await postactions(args.input, context.request.connection.remoteAddress, "add")
         },
-        rmlike: async (_parent:any, args: {input: {uid: string, postid: number } }, context: any, _info: any) => {
-            return await likes(args.input, context.request.connection.remoteAddress, "rm")
-        }
+        rmpostlike: async (_parent: any, args: {input: {uid: string, postid: number } }, context: any, _info: any) => {
+            return await postactions(args.input, context.request.connection.remoteAddress, "rm")
+        },
+        viewpost: async (_parent: any, args: {input: {uid: string, postid: number } }, context: any, _info: any) => {
+            return await postactions(args.input, context.request.connection.remoteAddress, "view")
+        },
+        prlike: async (_parent: any, args: {input: {uid: string, profileid: number } }, context: any, _info: any) => {
+          return await practions(args.input, context.request.connection.remoteAddress, "add")
+        },
+        rmprlike: async (_parent: any, args: {input: {uid: string, profileid: number } }, context: any, _info: any) => {
+            return await practions(args.input, context.request.connection.remoteAddress, "rm");
+        },
+        viewpr: async (_parent: any, args: {input: {uid: string, profileid: number } }, context: any, _info: any) => {
+            return await practions(args.input, context.request.connection.remoteAddress, "view");
+        },
+
     },
 }
 
