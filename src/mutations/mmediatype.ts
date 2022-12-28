@@ -18,7 +18,7 @@ export default async function mmediatype(_arguments: IMediatype, ip: string) {
             pid: 0
         }
         MissingError(report)
-        return "Missing args"          
+        return null          
     }
     // check if name exists
     const doesexist = await db.mediatype.findAll({
@@ -26,11 +26,11 @@ export default async function mmediatype(_arguments: IMediatype, ip: string) {
             category: _arguments.name
         }
     })
-    if (doesexist.category !== null) return doesexist.category
-    
+    if (doesexist.category !== undefined) return doesexist
     const mediatype = await db.mediatype.create({
         category: _arguments.name
-    }).catch((err: any) => {console.log(err)})
+    }).catch((err: any) => {console.log(err, "hello")})
+
     return mediatype
 
 

@@ -12,7 +12,7 @@ Make a comment
     b. catch error 
 TODO
     - 2fa 
-    
+    -  
 */
 export default async function mcomments(_arguments: ICommentsInput, ip: string) {
 
