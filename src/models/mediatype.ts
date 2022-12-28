@@ -9,7 +9,8 @@ export default function(sequelize:any, DataTypes: any) {
     },
     category: {
       type: DataTypes.STRING(20),
-      allowNull: false
+      allowNull: false,
+      unique: "category"
     },
     time_created: {
       type: DataTypes.DATE,
@@ -32,6 +33,14 @@ export default function(sequelize:any, DataTypes: any) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "category",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "category" },
         ]
       },
     ]

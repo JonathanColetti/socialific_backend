@@ -5,6 +5,7 @@ var _history = require("./history");
 var _mediatype = require("./mediatype");
 var _mediatyperatings = require("./mediatyperatings");
 var _postlikes = require("./postlikes");
+var _postmediatype = require("./postmediatype");
 var _posts = require("./posts");
 var _posttags = require("./posttags");
 var _profilelikes = require("./profilelikes");
@@ -27,6 +28,7 @@ function initModels(sequelize) {
   var mediatype = _mediatype(sequelize, DataTypes);
   var mediatyperatings = _mediatyperatings(sequelize, DataTypes);
   var postlikes = _postlikes(sequelize, DataTypes);
+  var postmediatype = _postmediatype(sequelize, DataTypes);
   var posts = _posts(sequelize, DataTypes);
   var posttags = _posttags(sequelize, DataTypes);
   var profilelikes = _profilelikes(sequelize, DataTypes);
@@ -43,15 +45,17 @@ function initModels(sequelize) {
   var userratings = _userratings(sequelize, DataTypes);
 
   comments.belongsToMany(profiles, { as: 'profileid_profiles', through: commentlikes, foreignKey: "cmtid", otherKey: "profileid" });
-  posts.belongsToMany(profiles, { as: 'profileid_profiles_postlikes', through: postlikes, foreignKey: "postid", otherKey: "profileid" });
+  mediatype.belongsToMany(posts, { as: 'postid_posts_postmediatypes', through: postmediatype, foreignKey: "mediat", otherKey: "postid" });
+  posts.belongsToMany(mediatype, { as: 'mediat_mediatypes', through: postmediatype, foreignKey: "postid", otherKey: "mediat" });
   posts.belongsToMany(tags, { as: 'tagid_tags', through: posttags, foreignKey: "postid", otherKey: "tagid" });
+  posts.belongsToMany(userauth, { as: 'auid_userauths', through: postlikes, foreignKey: "postid", otherKey: "auid" });
   profiles.belongsToMany(comments, { as: 'cmtid_comments', through: commentlikes, foreignKey: "profileid", otherKey: "cmtid" });
-  profiles.belongsToMany(posts, { as: 'postid_posts', through: postlikes, foreignKey: "profileid", otherKey: "postid" });
   profiles.belongsToMany(replies, { as: 'rplyid_replies', through: replylikes, foreignKey: "profileid", otherKey: "rplyid" });
   profiles.belongsToMany(userauth, { as: 'userauthid_userauths', through: profilelikes, foreignKey: "profileid", otherKey: "userauthid" });
   profiles.belongsToMany(userauth, { as: 'userauthid_userauth_profileviews', through: profileviews, foreignKey: "profileid", otherKey: "userauthid" });
   replies.belongsToMany(profiles, { as: 'profileid_profiles_replylikes', through: replylikes, foreignKey: "rplyid", otherKey: "profileid" });
   tags.belongsToMany(posts, { as: 'postid_posts_posttags', through: posttags, foreignKey: "tagid", otherKey: "postid" });
+  userauth.belongsToMany(posts, { as: 'postid_posts', through: postlikes, foreignKey: "auid", otherKey: "postid" });
   userauth.belongsToMany(profiles, { as: 'profileid_profiles_profilelikes', through: profilelikes, foreignKey: "userauthid", otherKey: "profileid" });
   userauth.belongsToMany(profiles, { as: 'profileid_profiles_profileviews', through: profileviews, foreignKey: "userauthid", otherKey: "profileid" });
   commentlikes.belongsTo(comments, { as: "cmt", foreignKey: "cmtid"});
@@ -60,22 +64,22 @@ function initModels(sequelize) {
   comments.hasMany(replies, { as: "replies", foreignKey: "cmtid"});
   mediatyperatings.belongsTo(mediatype, { as: "ct", foreignKey: "ctid"});
   mediatype.hasMany(mediatyperatings, { as: "mediatyperatings", foreignKey: "ctid"});
-  posts.belongsTo(mediatype, { as: "ct", foreignKey: "ctid"});
-  mediatype.hasMany(posts, { as: "posts", foreignKey: "ctid"});
+  postmediatype.belongsTo(mediatype, { as: "mediat_mediatype", foreignKey: "mediat"});
+  mediatype.hasMany(postmediatype, { as: "postmediatypes", foreignKey: "mediat"});
   comments.belongsTo(posts, { as: "post", foreignKey: "postid"});
   posts.hasMany(comments, { as: "comments", foreignKey: "postid"});
   history.belongsTo(posts, { as: "vid_post", foreignKey: "vid"});
   posts.hasMany(history, { as: "histories", foreignKey: "vid"});
   postlikes.belongsTo(posts, { as: "post", foreignKey: "postid"});
   posts.hasMany(postlikes, { as: "postlikes", foreignKey: "postid"});
+  postmediatype.belongsTo(posts, { as: "post", foreignKey: "postid"});
+  posts.hasMany(postmediatype, { as: "postmediatypes", foreignKey: "postid"});
   posttags.belongsTo(posts, { as: "post", foreignKey: "postid"});
   posts.hasMany(posttags, { as: "posttags", foreignKey: "postid"});
   tags.belongsTo(posts, { as: "pst", foreignKey: "pstid"});
   posts.hasMany(tags, { as: "tags", foreignKey: "pstid"});
   commentlikes.belongsTo(profiles, { as: "profile", foreignKey: "profileid"});
   profiles.hasMany(commentlikes, { as: "commentlikes", foreignKey: "profileid"});
-  postlikes.belongsTo(profiles, { as: "profile", foreignKey: "profileid"});
-  profiles.hasMany(postlikes, { as: "postlikes", foreignKey: "profileid"});
   profilelikes.belongsTo(profiles, { as: "profile", foreignKey: "profileid"});
   profiles.hasMany(profilelikes, { as: "profilelikes", foreignKey: "profileid"});
   profileviews.belongsTo(profiles, { as: "profile", foreignKey: "profileid"});
@@ -100,6 +104,8 @@ function initModels(sequelize) {
   userauth.hasMany(history, { as: "histories", foreignKey: "auid"});
   mediatyperatings.belongsTo(userauth, { as: "au", foreignKey: "auid"});
   userauth.hasMany(mediatyperatings, { as: "mediatyperatings", foreignKey: "auid"});
+  postlikes.belongsTo(userauth, { as: "au", foreignKey: "auid"});
+  userauth.hasMany(postlikes, { as: "postlikes", foreignKey: "auid"});
   posts.belongsTo(userauth, { as: "au", foreignKey: "auid"});
   userauth.hasMany(posts, { as: "posts", foreignKey: "auid"});
   profilelikes.belongsTo(userauth, { as: "userauth", foreignKey: "userauthid"});
@@ -126,6 +132,7 @@ function initModels(sequelize) {
     mediatype,
     mediatyperatings,
     postlikes,
+    postmediatype,
     posts,
     posttags,
     profilelikes,

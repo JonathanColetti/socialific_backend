@@ -8,6 +8,7 @@ export interface iprofiles extends itable {
     username: string,
     propic: string,
     bg: string,
+    whosees: string,
     pubbg: string,
     stickers: string,
     border: string,

@@ -6,6 +6,7 @@ import muserauth from "../mutations/muserauth";
 import mprofile from "../mutations/mprofile";
 import mpost from "../mutations/mposts";
 import mcomments from "../mutations/mcomments";
+import { likes } from "../updators/likes";
 
 const resolvers = {
     /* Every query resolver must have parent, args, context, info */
@@ -28,7 +29,7 @@ const resolvers = {
             return await muserauth(args.input, context.request.connection.remoteAddress)
         },
         cprofile: async (_parent: any, args: {
-            input: {uid: string,propic: string, username: string, bg: string, stickers: string, name: string, location: string, font: string, cmntstickers: string, border: string, bio: string, rname: string}}
+            input: {uid: string,propic: string, username: string, bg: string, stickers: string, name: string, location: string, font: string, cmntstickers: string, border: string, bio: string, whosees: string, rname: string}}
             , context: any, _info: any) => {
             return await mprofile(args.input, context.request.connection.remoteAddress)
         },
@@ -38,6 +39,12 @@ const resolvers = {
         ccomment: async (_parent: any, args: {input:{uid: string, comment: string, medialnk:string, post: number}}, context: any, _info: any) => {
             return await mcomments(args.input, context.request.connection.remoteAddress)
         },
+        addlikes: async (_parent: any, args: {input: {uid: string, postid: number}}, context: any, _info: any) => {
+            return await likes(args.input, context.request.connection.remoteAddress, "add")
+        },
+        rmlike: async (_parent:any, args: {input: {uid: string, postid: number } }, context: any, _info: any) => {
+            return await likes(args.input, context.request.connection.remoteAddress, "rm")
+        }
     },
 }
 

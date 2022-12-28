@@ -21,9 +21,11 @@ CREATE TABLE userauth(
 CREATE TABLE profiles(
     id int NOT NULL AUTO_INCREMENT,
     username VARCHAR(25) NOT NULL UNIQUE,
+    ctid int NOT NULL,
     propic VARCHAR(500),
     bg VARCHAR(500),
-    lang VARCHAR(5)
+    lang VARCHAR(5),
+    whosees VARCHAR(500),
     pubbg VARCHAR(500),
     stickers VARCHAR(500),
     cmntstickers VARCHAR(500),
@@ -38,6 +40,7 @@ CREATE TABLE profiles(
     PRIMARY KEY (id)
 
 );
+
 
 CREATE TABLE mediatype(
     id int NOT NULL AUTO_INCREMENT,
@@ -200,12 +203,12 @@ CREATE TABLE commentlikes(
 );
 
 CREATE TABLE postlikes(
-    profileid int NOT NULL,
+    auid int NOT NULL,
     postid int NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (profileid) REFERENCES profiles(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
     FOREIGN KEY (postid) REFERENCES posts(id),
-    PRIMARY KEY (profileid, postid)
+    PRIMARY KEY (auid, postid)
 );
 CREATE TABLE posttags(
     postid int NOT NULL,
@@ -241,4 +244,4 @@ CREATE TABLE postmediatype (
     FOREIGN KEY (postid) REFERENCES posts(id),
     FOREIGN KEY (mediat) REFERENCES mediatype(id),
     PRIMARY KEY (postid, mediat)
-)
+);

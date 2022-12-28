@@ -1,21 +1,21 @@
 import {Sequelize, DataTypes} from 'sequelize';
 export default function(sequelize:any, DataTypes: any) {
-  return sequelize.define('postlikes', {
-    auid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'userauth',
-        key: 'id'
-      }
-    },
+  return sequelize.define('postmediatype', {
     postid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
         model: 'posts',
+        key: 'id'
+      }
+    },
+    mediat: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'mediatype',
         key: 'id'
       }
     },
@@ -26,7 +26,7 @@ export default function(sequelize:any, DataTypes: any) {
     }
   }, {
     sequelize,
-    tableName: 'postlikes',
+    tableName: 'postmediatype',
     timestamps: false,
     indexes: [
       {
@@ -34,15 +34,15 @@ export default function(sequelize:any, DataTypes: any) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "auid" },
           { name: "postid" },
+          { name: "mediat" },
         ]
       },
       {
-        name: "postid",
+        name: "mediat",
         using: "BTREE",
         fields: [
-          { name: "postid" },
+          { name: "mediat" },
         ]
       },
     ]

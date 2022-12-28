@@ -1,4 +1,4 @@
-import db from "../database";
+import db, { sequelize } from "../database";
 import { IPostsInput } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports";
 import checkvalid from "../lib/util/verification/checkvalid";
@@ -43,6 +43,7 @@ export default async function mpost(_arguments: IPostsInput, ip: string) {
     const thepost = await db.posts.create({
         auid:  theauth.id,
         soundid: _arguments.soundid,
+        ctid: _arguments.ctid,
         caption: _arguments.caption,
         plocation: _arguments.plocation,
         medialnk: _arguments.medialnk,
@@ -63,9 +64,16 @@ export default async function mpost(_arguments: IPostsInput, ip: string) {
     // try to make new media types
     // add mediatype and postid to relationdb
     keywords.forEach(async element => {
-        await mmediatype({uid: _arguments.uid, name: element}, ip);
-        
+        const mtid = await mmediatype({uid: _arguments.uid, name: element}, ip).then((obj) => obj);
+        if (mtid !== null) {
+            console.log(mtid.id, element)
+            await db.postmediatype.create({
+                postid: thepost.id,
+                mediat: mtid.id
+            }).catch((err: any) => {console.error(err)})
+        }
     });
+    
     return {
         state: "Sucess",
         post: thepost

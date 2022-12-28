@@ -17,6 +17,7 @@ export interface IProfileInput extends Input {
     rname: string
     propic: string
     bg: string 
+    whosees: string
     bio: string
     stickers: string 
     cmntstickers: string 

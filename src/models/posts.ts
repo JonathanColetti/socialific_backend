@@ -7,14 +7,6 @@ export default function(sequelize:any, DataTypes: any) {
       allowNull: false,
       primaryKey: true
     },
-    ctid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'mediatype',
-        key: 'id'
-      }
-    },
     auid: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -76,13 +68,6 @@ export default function(sequelize:any, DataTypes: any) {
         using: "BTREE",
         fields: [
           { name: "soundid" },
-        ]
-      },
-      {
-        name: "ctid",
-        using: "BTREE",
-        fields: [
-          { name: "ctid" },
         ]
       },
       {

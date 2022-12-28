@@ -11,7 +11,8 @@ import soundratings from './models/soundratings.js';
 import mediatyperatings from './models/mediatyperatings.js';
 import comments from './models/comments.js';
 import reports from './models/reports.js';
-
+import postmediatype from './models/postmediatype.js';
+import postlikes from './models/postlikes.js';
 
 dotenv.config()
 
@@ -23,8 +24,10 @@ let models: Array<Function> = [
     Profiles,
     userauth,
     posts,
+    postlikes,
     comments,
     mediatype,
+    postmediatype,
     tagratings,
     userratings,
     soundratings,

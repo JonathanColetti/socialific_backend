@@ -12,11 +12,23 @@ export default function(sequelize:any, DataTypes: any) {
       allowNull: false,
       unique: "username"
     },
+    ctid: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     propic: {
       type: DataTypes.STRING(500),
       allowNull: true
     },
     bg: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    lang: {
+      type: DataTypes.STRING(5),
+      allowNull: true
+    },
+    whosees: {
       type: DataTypes.STRING(500),
       allowNull: true
     },

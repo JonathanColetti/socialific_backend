@@ -12,6 +12,8 @@ const typeDefs = `
         cpost(input: PostsInput): PostsWErr
         ccomment(input: CommentInput): CommentsWErr
         cmediatype(input: MediatypeInput): String
+        addlikes(input: LikeInput): String
+        rmlike(input: LikeInput): String
     }
     input UserAuthInput {
         phonenum: String
@@ -23,6 +25,7 @@ const typeDefs = `
     input PostsInput {
         uid: String
         ctid: Int
+        whosees: String
         medialnk: String
         caption: String
         plocation: String
@@ -34,6 +37,7 @@ const typeDefs = `
         bg: String
         stickers: String
         cmntstickers: String
+        whosees: String
         border: String
         uid: String
         name: String
@@ -50,7 +54,10 @@ const typeDefs = `
     input MediatypeInput {
         comment: String 
     }
-    
+    input LikeInput {
+        uid: String
+        postid: Int
+    }
     type Userauth {
         id: ID!
         userid: String
@@ -72,6 +79,7 @@ const typeDefs = `
         bg: String
         pubbg: String
         stickers: String
+        whosees: String
         border: String
         font: String
         rname: String
