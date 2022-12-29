@@ -1,5 +1,5 @@
 import db from "../../database"
-import { iuserauth } from "../../resolvers/ruserauth"
+import { iuserauth } from "../util/interfaces/tables"
 import { imediatyperatings, iprofilerating, isoundratings, itagratings } from "../util/interfaces/ratings"
 
 // maps contain (key = tagid etc), (value = score)

@@ -1,4 +1,4 @@
-import { iuserauth } from "../../../resolvers/ruserauth";
+import { iuserauth } from "../interfaces/tables";
 import { twofactorauth } from "./verification";
 import {lookup} from 'geoip-lite';
 
