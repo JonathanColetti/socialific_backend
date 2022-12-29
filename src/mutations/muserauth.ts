@@ -21,7 +21,7 @@ export default async function muserauth(args: IUauthInput, ip: string) {
             pid: 0,
             ip: ip,
             filename: 'muserauth',
-            values: args
+            values: 'args'
         }
         MissingError(report)
         return {state: "Missing arg", userauth: null}

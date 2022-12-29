@@ -34,8 +34,7 @@ export const postactions = async (args: IPostactions, ip: string, addorrm: strin
                 auid: theauth.id,
                 postid: args.postid
             }
-        }).catch((err: any) => {console.log(err)})
-        // console.log(todelete.destory())
+        }).catch((err: any) => {console.log(err, "Helll;o")})
         await todelete.destroy();
         return "Sucess"
     } 
@@ -43,7 +42,7 @@ export const postactions = async (args: IPostactions, ip: string, addorrm: strin
         await db.postviews.create({
             auid: theauth.id,
             postid: args.postid,
-        }).catch((err: any) => console.error(err))
+        }).catch((err: any) => console.error(err, "TEST"))
         return "Sucess";
     }
 }

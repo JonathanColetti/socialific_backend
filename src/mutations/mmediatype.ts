@@ -21,12 +21,12 @@ export default async function mmediatype(args: IMediatype, ip: string) {
         return null          
     }
     // check if name exists
-    const doesexist = await db.mediatype.findAll({
+    const doesexist = await db.mediatype.findOne({
         where: {
             category: args.name
         }
-    })
-    if (doesexist.category !== undefined) return doesexist
+    }).catch((err: any) => console.error(err, "HH"))
+    if (doesexist !== null && doesexist.category !== undefined) return doesexist
     const mediatype = await db.mediatype.create({
         category: args.name
     }).catch((err: any) => {console.log(err, "hello")})

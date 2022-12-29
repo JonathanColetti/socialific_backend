@@ -20,7 +20,7 @@ TODO
     c. make relation ships 
 */
 export default async function mpost(args: IPostsInput, ip: string) {
-    if ((!checkvalid(args.uid)) && (!checkvalid(args.caption) || !checkvalid(args.medialnk)) ) {
+    if ( args.uid === undefined || args.whosees === undefined || args.caption === undefined ) {
         const report: Irepoting = {
             ip: ip,
             severity: 0,
@@ -39,7 +39,6 @@ export default async function mpost(args: IPostsInput, ip: string) {
     });
     if (theauth === null) {console.log("AUTH NULL")}
     
-
     const thepost = await db.posts.create({
         auid:  theauth.id,
         soundid: args.soundid,
@@ -64,13 +63,12 @@ export default async function mpost(args: IPostsInput, ip: string) {
     // try to make new media types
     // add mediatype and postid to relationdb
     keywords.forEach(async element => {
-        const mtid = await mmediatype({uid: args.uid, name: element}, ip).then((obj) => obj);
+        const mtid = await mmediatype({uid: args.uid, name: element}, ip).catch((err: any) => {console.error(err, "Hello")});
         if (mtid !== null) {
-            console.log(mtid.id, element)
             await db.postmediatype.create({
                 postid: thepost.id,
                 mediat: mtid.id
-            }).catch((err: any) => {console.error(err)})
+            }).catch((err: any) => {console.error(err, "LOL")})
         }
     });
     
