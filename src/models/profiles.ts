@@ -12,10 +12,6 @@ export default function(sequelize:any, DataTypes: any) {
       allowNull: false,
       unique: "username"
     },
-    ctid: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     auid: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -33,7 +29,7 @@ export default function(sequelize:any, DataTypes: any) {
       allowNull: true
     },
     lang: {
-      type: DataTypes.STRING(5),
+      type: DataTypes.STRING(100),
       allowNull: true
     },
     whosees: {
@@ -67,16 +63,6 @@ export default function(sequelize:any, DataTypes: any) {
     bio: {
       type: DataTypes.STRING(100),
       allowNull: false
-    },
-    sviews: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    slikes: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
     },
     time_created: {
       type: DataTypes.DATE,

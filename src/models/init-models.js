@@ -4,6 +4,7 @@ var _comments = require("./comments");
 var _history = require("./history");
 var _mediatype = require("./mediatype");
 var _mediatyperatings = require("./mediatyperatings");
+var _postcommentemoji = require("./postcommentemoji");
 var _postlikes = require("./postlikes");
 var _postmediatype = require("./postmediatype");
 var _posts = require("./posts");
@@ -28,6 +29,7 @@ function initModels(sequelize) {
   var history = _history(sequelize, DataTypes);
   var mediatype = _mediatype(sequelize, DataTypes);
   var mediatyperatings = _mediatyperatings(sequelize, DataTypes);
+  var postcommentemoji = _postcommentemoji(sequelize, DataTypes);
   var postlikes = _postlikes(sequelize, DataTypes);
   var postmediatype = _postmediatype(sequelize, DataTypes);
   var posts = _posts(sequelize, DataTypes);
@@ -74,6 +76,8 @@ function initModels(sequelize) {
   posts.hasMany(comments, { as: "comments", foreignKey: "postid"});
   history.belongsTo(posts, { as: "vid_post", foreignKey: "vid"});
   posts.hasMany(history, { as: "histories", foreignKey: "vid"});
+  postcommentemoji.belongsTo(posts, { as: "post", foreignKey: "postid"});
+  posts.hasMany(postcommentemoji, { as: "postcommentemojis", foreignKey: "postid"});
   postlikes.belongsTo(posts, { as: "post", foreignKey: "postid"});
   posts.hasMany(postlikes, { as: "postlikes", foreignKey: "postid"});
   postmediatype.belongsTo(posts, { as: "post", foreignKey: "postid"});
@@ -110,6 +114,8 @@ function initModels(sequelize) {
   userauth.hasMany(history, { as: "histories", foreignKey: "auid"});
   mediatyperatings.belongsTo(userauth, { as: "au", foreignKey: "auid"});
   userauth.hasMany(mediatyperatings, { as: "mediatyperatings", foreignKey: "auid"});
+  postcommentemoji.belongsTo(userauth, { as: "au", foreignKey: "auid"});
+  userauth.hasMany(postcommentemoji, { as: "postcommentemojis", foreignKey: "auid"});
   postlikes.belongsTo(userauth, { as: "au", foreignKey: "auid"});
   userauth.hasMany(postlikes, { as: "postlikes", foreignKey: "auid"});
   posts.belongsTo(userauth, { as: "au", foreignKey: "auid"});
@@ -141,6 +147,7 @@ function initModels(sequelize) {
     history,
     mediatype,
     mediatyperatings,
+    postcommentemoji,
     postlikes,
     postmediatype,
     posts,

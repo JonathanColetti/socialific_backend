@@ -62,6 +62,7 @@ export const practions = async (args: {uid: string, profileid: number }, ip: str
 
 
 export const editprofile = async (args: IProfileInput , ip: string, ) => {
+    
     if (args.uid === undefined) {
         const report: Irepoting = {
             ip: "",

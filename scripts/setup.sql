@@ -253,3 +253,14 @@ CREATE TABLE postmediatype (
     FOREIGN KEY (mediat) REFERENCES mediatype(id),
     PRIMARY KEY (postid, mediat)
 );
+
+
+CREATE TABLE postcommentemoji(
+    id int NOT NULL AUTO_INCREMENT,
+    postid int NOT NULL,
+    auid int NOT NULL,
+    emoji VARCHAR(100) NOT NULL,
+    FOREIGN KEY (postid) REFERENCES posts(id),
+    FOREIGN KEY (auid) REFERENCES userauth(id),
+    PRIMARY KEY (id)
+);

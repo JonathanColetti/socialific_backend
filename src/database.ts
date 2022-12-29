@@ -13,6 +13,7 @@ import comments from './models/comments.js';
 import reports from './models/reports.js';
 import postmediatype from './models/postmediatype.js';
 import postlikes from './models/postlikes.js';
+import postviews from './models/postviews.js';
 
 dotenv.config()
 
@@ -32,7 +33,8 @@ let models: Array<Function> = [
     userratings,
     soundratings,
     mediatyperatings,
-    reports
+    reports,
+    postviews,
 ]
 export const sequelize = new Sequelize(
     process.env.DB!,

@@ -18,7 +18,7 @@ const typeDefs = `
         prlike(input: PrActionInput): String
         rmprlike(input: PrActionInput): String
         viewpr(input: PrActionInput): String
-        editprofile(input: ProfileInput): ProfileWErr
+        editprofile(input: ProfileInput): String
         editua(input: UActionInput): String
     }
     input UserAuthInput {
