@@ -1,5 +1,5 @@
 import db from "../database"
-import { rmUa } from "../lib/util/interfaces/inputs"
+import { IRmUa } from "../lib/util/interfaces/inputs"
 import { Irepoting } from "../lib/util/interfaces/reports"
 import { iuserauth } from "../lib/util/interfaces/tables"
 import { MissingError } from "../reporting/rdb"
@@ -46,7 +46,7 @@ export const userauthedit = async (args: UActionInput, ip: string): Promise<stri
 }
 
 
-export const deleteua = async (args: rmUa, ip: string): Promise<null | "Sucess"> => {
+export const deleteua = async (args: IRmUa, ip: string): Promise<null | "Sucess"> => {
     if (args.uid === undefined && args.password === undefined) {
         const report: Irepoting = {
             ip: ip,

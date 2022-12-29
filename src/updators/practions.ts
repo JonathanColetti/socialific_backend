@@ -1,5 +1,5 @@
 import db from "../database";
-import { IProfileInput } from "../lib/util/interfaces/inputs";
+import { IProfileInput, IRmPr } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports"
 import { iprofiles, iuserauth } from "../lib/util/interfaces/tables";
 import checkProperties from "../lib/util/verification/checkvalid";
@@ -146,7 +146,7 @@ export const editprofile = async (args: IProfileInput , ip: string, ) => {
 }
 
 
-export const deletepr = async (args: IProfileInput, ip: string) => {
+export const deletepr = async (args: IRmPr, ip: string) => {
 
     if (args.uid === undefined) {
         const report: Irepoting = {

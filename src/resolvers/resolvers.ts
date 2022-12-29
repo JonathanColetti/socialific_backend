@@ -8,8 +8,7 @@ import mpost from "../mutations/mposts";
 import mcomments from "../mutations/mcomments";
 import { addEmoji, postactions, removepost } from "../updators/postactions";
 import { deletepr, editprofile, practions } from "../updators/practions";
-import { IAddEmoji, ICommentsInput, IPostactions, IPostsInput, IProfileactions, IProfileInput, IRcomments, IRposts, IRprofiles, IRuserauth, IUauthInput, rmPost, rmUa } from "../lib/util/interfaces/inputs";
-import { iuserauth } from "../lib/util/interfaces/tables";
+import { IAddEmoji, ICommentsInput, IPostactions, IPostsInput, IProfileactions, IProfileInput, IRcomments, IRmPost, IRmPr, IRmUa, IRposts, IRprofiles, IRuserauth, IUauthInput } from "../lib/util/interfaces/inputs";
 import { deleteua, UActionInput, userauthedit } from "../updators/uaactions";
 
 const resolvers = {
@@ -66,13 +65,13 @@ const resolvers = {
         editua: async (_parent: any, args: {input: UActionInput}, context: any, _info: any) => {
             return await userauthedit(args.input, context.request.connection.remoteAddress)
         },
-        rmprofile: async (_parent: any, args: {input: IProfileInput}, context: any, _info: any) => {
+        rmprofile: async (_parent: any, args: {input: IRmPr}, context: any, _info: any) => {
             return await deletepr(args.input, context.request.connection.remoteAddress)
         },
-        rmuserauth: async (_parent: any, args: {input: rmUa }, context: any, _info: any) => {
+        rmuserauth: async (_parent: any, args: {input: IRmUa }, context: any, _info: any) => {
             return await deleteua(args.input, context.request.connection.remoteAddress)
         },
-        rmpost: async (_parent: any, args: {input: rmPost }, context: any, _info: any) => {
+        rmpost: async (_parent: any, args: {input: IRmPost }, context: any, _info: any) => {
             return await removepost(args.input, context.request.connection.remoteAddress)
         },
         addemojipost: async (_parent: any, args: {input: IAddEmoji }, context: any, _info: any) => {

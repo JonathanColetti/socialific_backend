@@ -1,5 +1,5 @@
 import db from "../database"
-import { IAddEmoji, IEditpost, IPostactions, rmPost } from "../lib/util/interfaces/inputs";
+import { IAddEmoji, IEditpost, IPostactions, IRmPost } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports";
 import { iuserauth } from "../lib/util/interfaces/tables";
 import { MissingError } from "../reporting/rdb";
@@ -89,7 +89,7 @@ export const editpost = async (args: IEditpost, ip: string): Promise<null | "Suc
 }
 
 
-export const removepost = async (args: rmPost , ip: string): Promise<null | "Sucess"> => {
+export const removepost = async (args: IRmPost , ip: string): Promise<null | "Sucess"> => {
     if (args.uid === undefined || args.postid === undefined) {
         const report: Irepoting = {
             ip: ip,
@@ -130,8 +130,14 @@ export const addEmoji = async (args: IAddEmoji, ip: string) => {
         MissingError(report);
         return null;
     }
+    const theauth = await db.userauth.findOne({
+        where: { userid: args.uid }
+    })
+    if (theauth === null) return null;
     await db.postcommentemoji.create({
-        
-    })    
+        commentid: args.commentid,
+        auid: theauth.id
+    })
+
 
 }

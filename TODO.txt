@@ -4,3 +4,4 @@
 - Handle all errors
 - Keyword extractor to other languages besides english
 - Implement google translate 
+- Get ready for release 

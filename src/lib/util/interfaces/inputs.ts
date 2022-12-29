@@ -77,10 +77,14 @@ export interface IAddEmoji extends Input {
     commentid: number
 }
 
-export interface rmPost extends Input { 
+export interface IRmPost extends Input { 
     postid: number
 }
 
-export interface rmUa extends Input {
+export interface IRmUa extends Input {
     password: string
+}
+
+export interface IRmPr extends Input {
+    
 }
