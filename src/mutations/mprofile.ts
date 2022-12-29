@@ -15,8 +15,7 @@ TODO
     - fix checkvalid 
 */
 export default async function mprofile( args: IProfileInput, ip: string ) {
-    if ( checkvalid(args.uid) ||  checkvalid(args.username) || checkvalid(args.propic)
-        || checkvalid(args.bio)) {
+    if ( args.username === undefined || args.uid === undefined ) {
         // report and return null
         const report: Irepoting = {
             ip: ip,
@@ -29,7 +28,7 @@ export default async function mprofile( args: IProfileInput, ip: string ) {
         return {state: "Missing Args", profile: null}
     };
     // check valid uid
-    const useracc: iuserauth = await db.userauth.findAll({
+    const useracc: iuserauth = await db.userauth.findOne({
         where: {
             userid: args.uid
         }
@@ -40,13 +39,16 @@ export default async function mprofile( args: IProfileInput, ip: string ) {
     //     // 2fa
     // }
     // create account
-    const createdaccount: iprofiles = db.profiles.create({
+
+    const createdaccount: iprofiles = await db.profiles.create({
         username: args.username,
+        auid: useracc.id,
         bio: args.bio,
         rname: args.rname
 
     }).catch((err: any) => {
         // handle
+        console.log(err)
         if (err.name === "SequelizeUniqueConstraintError") {
             return {state: "Username is taken", profile: null}
         }
