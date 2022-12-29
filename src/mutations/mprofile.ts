@@ -14,16 +14,16 @@ Make a profile using muations
 TODO
     - fix checkvalid 
 */
-export default async function mprofile( _arguments: IProfileInput, ip: string ) {
-    if ( checkvalid(_arguments.uid) ||  checkvalid(_arguments.username) || checkvalid(_arguments.propic)
-        || checkvalid(_arguments.bio)) {
+export default async function mprofile( args: IProfileInput, ip: string ) {
+    if ( checkvalid(args.uid) ||  checkvalid(args.username) || checkvalid(args.propic)
+        || checkvalid(args.bio)) {
         // report and return null
         const report: Irepoting = {
             ip: ip,
             severity: 0,
             filename: 'mprofile',
             pid: 0,
-            values: _arguments
+            values: args
         }
         await MissingError(report)
         return {state: "Missing Args", profile: null}
@@ -31,7 +31,7 @@ export default async function mprofile( _arguments: IProfileInput, ip: string ) 
     // check valid uid
     const useracc: iuserauth = await db.userauth.findAll({
         where: {
-            userid: _arguments.uid
+            userid: args.uid
         }
     })
     if (useracc.userid === undefined) return {state:"Non valid uid", profile: null}
@@ -41,9 +41,9 @@ export default async function mprofile( _arguments: IProfileInput, ip: string ) 
     // }
     // create account
     const createdaccount: iprofiles = db.profiles.create({
-        username: _arguments.username,
-        bio: _arguments.bio,
-        rname: _arguments.rname
+        username: args.username,
+        bio: args.bio,
+        rname: args.rname
 
     }).catch((err: any) => {
         // handle

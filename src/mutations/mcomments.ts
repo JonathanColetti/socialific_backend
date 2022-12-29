@@ -14,15 +14,15 @@ TODO
     - 2fa 
     -  
 */
-export default async function mcomments(_arguments: ICommentsInput, ip: string) {
+export default async function mcomments(args: ICommentsInput, ip: string) {
 
-    if (_arguments.uid === undefined || _arguments.comment === undefined || _arguments.post === undefined) {
+    if (args.uid === undefined || args.comment === undefined || args.post === undefined) {
             const report: Irepoting = {
                 severity: 0,
                 pid: 0,
                 ip: ip,
                 filename: 'mcomments',
-                values: _arguments
+                values: args
             }
             MissingError(report)
             return {
@@ -32,15 +32,15 @@ export default async function mcomments(_arguments: ICommentsInput, ip: string) 
     }
     const theuser: iuserauth = await db.userauth.findOne({
         where: {
-            userid: _arguments.uid
+            userid: args.uid
         }
     })
     if (theuser.id === undefined) {}
     const createdcomment: any = db.comments.create({
-        postid: _arguments.post,
+        postid: args.post,
         auid: theuser.id,
-        comment: _arguments.comment,
-        commentlnk: _arguments.medialnk
+        comment: args.comment,
+        commentlnk: args.medialnk
 
     }).catch((err: any) => {})
     return {

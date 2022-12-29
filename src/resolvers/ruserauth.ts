@@ -1,4 +1,5 @@
 import db from "../database"
+import { IRuserauth } from "../lib/util/interfaces/inputs";
 import { iuserauth } from "../lib/util/interfaces/tables";
 import verifyip from "../lib/util/verification/checkip"
 
@@ -10,37 +11,35 @@ import verifyip from "../lib/util/verification/checkip"
         b. check if ip matches and no sus behaviour
         c. Login i.e trade email or phonenum for uid
 */
-export default async function resolveUserAuth(uid: string, email: string, password: string, phonenum: string, ipaddr: string) {
+export default async function resolveUserAuth(args: IRuserauth, ipaddr: string): Promise<iuserauth | null> {
 
 
     var retuserauth: iuserauth | null = null;
 
-    if (uid !== undefined) {
+    if (args.uid !== undefined) {
         retuserauth = await db.userauth.findOne({
             where: {
-                userid: uid
+                userid: args.uid
         }});
 
-    } else if (email !== undefined && password !== undefined) {
+    } else if (args.email !== undefined && args.password !== undefined) {
         // Get profile based on email and password
         retuserauth = await db.userauth.findOne({
             where: {
-                email: email,
-                password: password
+                email: args.email,
+                password: args.password
         }});
-    } else if (phonenum !== undefined && password !== undefined) {
+    } else if (args.phonenum !== undefined && args.password !== undefined) {
         // Get profile based on phone number and password
         retuserauth = await db.userauth.findOne({
             where: {
-                phonenum: phonenum,
-                password: password
+                phonenum: args.phonenum,
+                password: args.password
         }});
     } 
     if (retuserauth === null) return null;
     if (!verifyip(ipaddr, retuserauth)) {
         // 2fa here
     } 
-     
     return retuserauth;
-
 }

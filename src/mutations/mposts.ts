@@ -19,13 +19,13 @@ TODO
     b. check ip
     c. make relation ships 
 */
-export default async function mpost(_arguments: IPostsInput, ip: string) {
-    if ((!checkvalid(_arguments.uid)) && (!checkvalid(_arguments.caption) || !checkvalid(_arguments.medialnk)) ) {
+export default async function mpost(args: IPostsInput, ip: string) {
+    if ((!checkvalid(args.uid)) && (!checkvalid(args.caption) || !checkvalid(args.medialnk)) ) {
         const report: Irepoting = {
             ip: ip,
             severity: 0,
             filename: "mpost",
-            values: _arguments,
+            values: args,
             pid: 0
         }
         MissingError(report)
@@ -34,7 +34,7 @@ export default async function mpost(_arguments: IPostsInput, ip: string) {
 
     const theauth: iuserauth = await db.userauth.findOne({
         where: {
-            userid: _arguments.uid
+            userid: args.uid
         }
     });
     if (theauth === null) {console.log("AUTH NULL")}
@@ -42,19 +42,19 @@ export default async function mpost(_arguments: IPostsInput, ip: string) {
 
     const thepost = await db.posts.create({
         auid:  theauth.id,
-        soundid: _arguments.soundid,
-        ctid: _arguments.ctid,
-        caption: _arguments.caption,
-        plocation: _arguments.plocation,
-        medialnk: _arguments.medialnk,
-        whosees: _arguments.whosees
+        soundid: args.soundid,
+        ctid: args.ctid,
+        caption: args.caption,
+        plocation: args.plocation,
+        medialnk: args.medialnk,
+        whosees: args.whosees
     }).catch((err: any) => {
         return {state: err.message, post: null}
     })
-    if (_arguments.whosees !== "all") {
+    if (args.whosees !== "all") {
         return {state: "sucess", post: thepost}        
     }
-    const keywords: string[] = keyword_extractor.extract(_arguments.caption, {
+    const keywords: string[] = keyword_extractor.extract(args.caption, {
         language: "english",
         remove_digits: false,
         return_chained_words: false,
@@ -64,7 +64,7 @@ export default async function mpost(_arguments: IPostsInput, ip: string) {
     // try to make new media types
     // add mediatype and postid to relationdb
     keywords.forEach(async element => {
-        const mtid = await mmediatype({uid: _arguments.uid, name: element}, ip).then((obj) => obj);
+        const mtid = await mmediatype({uid: args.uid, name: element}, ip).then((obj) => obj);
         if (mtid !== null) {
             console.log(mtid.id, element)
             await db.postmediatype.create({

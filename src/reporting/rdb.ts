@@ -4,19 +4,19 @@ import { Irepoting } from "../lib/util/interfaces/reports"
 
 
 // Create a report of auth
-export const AuthError = async (_arguments: Irepoting): Promise<boolean> => {
+export const AuthError = async (args: Irepoting): Promise<boolean> => {
     const AuthErr = await db.reports.create({
-        severity: _arguments.severity,
-        info: `${_arguments.ip} has failed on ${_arguments.filename} because of non vaild authentication trace: ${_arguments.values}`,
+        severity: args.severity,
+        info: `${args.ip} has failed on ${args.filename} because of non vaild authentication trace: ${args.values}`,
         pid: 0
     })
     return true
 }
 
-export const MissingError = async (_arguments: Irepoting):Promise<boolean> => {
+export const MissingError = async (args: Irepoting):Promise<boolean> => {
     const MissError = await db.reports.create({
-        severity: _arguments.severity,
-        info: `${_arguments.ip} has missed crucial args on ${_arguments.filename}, trace: ${_arguments.values}`,
+        severity: args.severity,
+        info: `${args.ip} has missed crucial args on ${args.filename}, trace: ${args.values}`,
         pid: 0,
     })
     return true

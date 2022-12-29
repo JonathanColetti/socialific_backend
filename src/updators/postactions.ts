@@ -1,14 +1,15 @@
 import db from "../database"
+import { IPostactions } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports";
 import { MissingError } from "../reporting/rdb";
 
-export const postactions: any = async (_arguments: { uid: string, postid: number }, ip: string, addorrm: string): Promise<null | string> => {
-    if (_arguments.uid === undefined && _arguments.postid === undefined ) {
+export const postactions = async (args: IPostactions, ip: string, addorrm: string): Promise<null | string> => {
+    if (args.uid === undefined && args.postid === undefined ) {
         const report: Irepoting = {
             ip: ip,
             severity: 0,
             filename: "likes.ts",
-            values: _arguments,
+            values: args,
             pid: 0
         }
         await MissingError(report)
@@ -16,15 +17,14 @@ export const postactions: any = async (_arguments: { uid: string, postid: number
     }
     const theauth = await db.userauth.findOne({
         where: {
-            userid: _arguments.uid
+            userid: args.uid
         }
     })
     if (theauth.id === undefined) return null;
     if (addorrm === "add") {
-        console.log("Ran")
         const likedpost = await db.postlikes.create({
             auid: theauth.id,
-            postid: _arguments.postid
+            postid: args.postid
         }).catch((err: any) => {console.error(err)} )
         return "Sucess"
     } 
@@ -32,7 +32,7 @@ export const postactions: any = async (_arguments: { uid: string, postid: number
         const todelete = await db.postlikes.findOne({
             where: {
                 auid: theauth.id,
-                postid: _arguments.postid
+                postid: args.postid
             }
         }).catch((err: any) => {console.log(err)})
         // console.log(todelete.destory())
@@ -42,8 +42,13 @@ export const postactions: any = async (_arguments: { uid: string, postid: number
     else {
         await db.postviews.create({
             auid: theauth.id,
-            postid: _arguments.postid,
+            postid: args.postid,
         }).catch((err: any) => console.error(err))
         return "Sucess";
     }
+}
+
+
+export const editpost = (args: any, ip: string) => {
+
 }

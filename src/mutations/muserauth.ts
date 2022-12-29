@@ -12,16 +12,16 @@ import { iuserauth } from "../lib/util/interfaces/tables";
         - Think about UUID collision
         - Error Formatting
 */
-export default async function muserauth(_arguments: IUauthInput, ip: string) {
+export default async function muserauth(args: IUauthInput, ip: string) {
     // (A+B+C)(C+D)
-    if ((_arguments.password === undefined || _arguments.birthday === undefined || _arguments.gender === undefined) && 
-    (_arguments.phonenum === undefined || _arguments.email === undefined)) {
+    if ((args.password === undefined || args.birthday === undefined || args.gender === undefined) && 
+    (args.phonenum === undefined || args.email === undefined)) {
         const report: Irepoting = {
             severity: 0,
             pid: 0,
             ip: ip,
             filename: 'muserauth',
-            values: _arguments
+            values: args
         }
         MissingError(report)
         return {state: "Missing arg", userauth: null}
@@ -29,11 +29,11 @@ export default async function muserauth(_arguments: IUauthInput, ip: string) {
     
     const createdua: iuserauth = db.userauth.create({
         userid: uuidv4(),
-        password: _arguments.password,
-        birthday: _arguments.birthday,
-        gender: _arguments.gender,
-        phonenum: _arguments.phonenum,
-        email: _arguments.email,
+        password: args.password,
+        birthday: args.birthday,
+        gender: args.gender,
+        phonenum: args.phonenum,
+        email: args.email,
         ipaddr: ip,
 
     }).catch((err: any) => {

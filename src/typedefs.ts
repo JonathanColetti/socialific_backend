@@ -12,12 +12,14 @@ const typeDefs = `
         cpost(input: PostsInput): PostsWErr
         ccomment(input: CommentInput): CommentsWErr
         cmediatype(input: MediatypeInput): String
-        postlike(input: PostLikeInput): String
-        rmpostlike(input: PostLikeInput): String
-        viewpost(input: PostLikeInput): String
-        prlike(input: PrLikeInput): String
-        rmprlike(input: PrLikeInput): String
-        viewpr(input: PrLikeInput): String
+        postlike(input: PostActionInput): String
+        rmpostlike(input: PostActionInput): String
+        viewpost(input: PostActionInput): String
+        prlike(input: PrActionInput): String
+        rmprlike(input: PrActionInput): String
+        viewpr(input: PrActionInput): String
+        editprofile(input: ProfileInput): ProfileWErr
+        editua(input: UActionInput): String
     }
     input UserAuthInput {
         phonenum: String
@@ -48,6 +50,7 @@ const typeDefs = `
         font: String
         location: String
         bio: String
+        pubbg: String
     }
     input CommentInput {
         uid: String
@@ -58,13 +61,19 @@ const typeDefs = `
     input MediatypeInput {
         comment: String 
     }
-    input PostLikeInput {
+    input PostActionInput {
         uid: String
         postid: Int
     }
-    input PrLikeInput {
+    input PrActionInput {
         uid: String
         profileid: Int
+    }
+    input UActionInput {
+        uid: String
+        phonenum: String
+        email: String
+        userpass: String
     }
     type Userauth {
         id: ID!
