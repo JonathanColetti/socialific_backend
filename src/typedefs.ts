@@ -20,9 +20,20 @@ const typeDefs = `
         viewpr(input: PrActionInput): String
         editprofile(input: ProfileInput): String
         editua(input: UActionInput): String
-        rmprofile(): String
-        rmuserauth(): String
-        rmpost(): String
+        rmprofile(input: RmPrInput): String
+        rmuserauth(input: RmUaInput): String
+        rmpost(input: RmPostInput): String
+    }
+    input RmPrInput {
+        uid: String
+    }
+    input RmUaInput {
+        uid: String
+        password: String
+    }
+    input RmPostInput {
+        uid: String
+        postid: Int
     }
     input UserAuthInput {
         phonenum: String
