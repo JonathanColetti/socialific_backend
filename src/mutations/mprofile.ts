@@ -39,8 +39,7 @@ export default async function mprofile( args: IProfileInput, ip: string ) {
     //     // 2fa
     // }
     // create account
-
-    const createdaccount: iprofiles = await db.profiles.create({
+    const createdaccount: iprofiles | string = await db.profiles.create({
         username: args.username,
         auid: useracc.id,
         bio: args.bio,
@@ -48,11 +47,12 @@ export default async function mprofile( args: IProfileInput, ip: string ) {
 
     }).catch((err: any) => {
         // handle
-        console.log(err)
-        if (err.name === "SequelizeUniqueConstraintError") {
-            return {state: "Username is taken", profile: null}
+        if (err.name == "SequelizeUniqueConstraintError") {
+            return "Error: username is taken"
+        } else {
+            return "Error: unkown"
         }
-        return {state: "Error", profile: null}
     })
-    return {state: "Sucess", profile: createdaccount}    
+    if (typeof createdaccount == 'string' ) return {state: createdaccount, profile: null}
+    return {state: "Sucess", profile: createdaccount}
 }

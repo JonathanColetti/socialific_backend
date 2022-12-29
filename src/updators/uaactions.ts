@@ -1,14 +1,14 @@
 import db from "../database"
 import { iuserauth } from "../lib/util/interfaces/tables"
 
-interface UActionInput {
+export interface UActionInput {
     uid: string
     phonenum: string
     email: string
     userpass: string
 }
 
-const userauthedit = async (args: UActionInput, ip: string): Promise<string | null> => {
+export const userauthedit = async (args: UActionInput, ip: string): Promise<string | null> => {
     
     if (args.uid === undefined) return null;
     const theauth: any = await db.userauth.findOne({
@@ -39,5 +39,5 @@ const userauthedit = async (args: UActionInput, ip: string): Promise<string | nu
             userpass: args.userpass
         })
     }
-    return "Sucess"
+    return "Sucess";
 }
