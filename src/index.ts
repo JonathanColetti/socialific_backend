@@ -19,4 +19,4 @@ const {url} = await startStandaloneServer(server, {
   context: async ({req}) => ({ request: req }),
   listen: {port: 5100}
 })
-console.log(`${url} on ${new Date}`)
+console.log(`${url}`)

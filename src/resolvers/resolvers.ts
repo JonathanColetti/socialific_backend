@@ -27,39 +27,39 @@ const resolvers = {
         }, 
     },
     Mutation: {
-        cuserauth: async (_parent: any, args: IUauthInput, context: any, _info: any) => {
-            return await muserauth(args, context.request.connection.remoteAddress)
+        cuserauth: async (_parent: any, args: {input: IUauthInput}, context: any, _info: any) => {
+            return await muserauth(args.input, context.request.connection.remoteAddress)
         },
-        cprofile: async (_parent: any, args: IProfileInput, context: any, _info: any) => {
-            return await mprofile(args, context.request.connection.remoteAddress)
+        cprofile: async (_parent: any, args: {input:  IProfileInput}, context: any, _info: any) => {
+            return await mprofile(args.input, context.request.connection.remoteAddress)
         },
-        cpost: async (_parent: any, args: IPostsInput, context: any, _info: any) => {
-            return await mpost(args, context.request.connection.remoteAddress)
+        cpost: async (_parent: any, args: {input:  IPostsInput}, context: any, _info: any) => {
+            return await mpost(args.input, context.request.connection.remoteAddress)
         },
-        ccomment: async (_parent: any, args: ICommentsInput , context: any, _info: any) => {
-            return await mcomments(args, context.request.connection.remoteAddress)
+        ccomment: async (_parent: any, args: {input:  ICommentsInput} , context: any, _info: any) => {
+            return await mcomments(args.input, context.request.connection.remoteAddress)
         },
-        postlike: async (_parent: any, args: IPostactions, context: any, _info: any) => {
-            return await postactions(args, context.request.connection.remoteAddress, "add")
+        postlike: async (_parent: any, args: {input:  IPostactions}, context: any, _info: any) => {
+            return await postactions(args.input, context.request.connection.remoteAddress, "add")
         },
-        rmpostlike: async (_parent: any, args: IPostactions, context: any, _info: any) => {
-            return await postactions(args, context.request.connection.remoteAddress, "rm")
+        rmpostlike: async (_parent: any, args: {input:  IPostactions}, context: any, _info: any) => {
+            return await postactions(args.input, context.request.connection.remoteAddress, "rm")
         },
-        viewpost: async (_parent: any, args: IPostactions, context: any, _info: any) => {
-            return await postactions(args, context.request.connection.remoteAddress, "view")
+        viewpost: async (_parent: any, args: {input:  IPostactions}, context: any, _info: any) => {
+            return await postactions(args.input, context.request.connection.remoteAddress, "view")
         },
-        prlike: async (_parent: any, args:  IProfileactions, context: any, _info: any) => {
-          return await practions(args, context.request.connection.remoteAddress, "add")
+        prlike: async (_parent: any, args: {input: IProfileactions}, context: any, _info: any) => {
+          return await practions(args.input, context.request.connection.remoteAddress, "add")
         },
-        rmprlike: async (_parent: any, args: IProfileactions, context: any, _info: any) => {
-            return await practions(args, context.request.connection.remoteAddress, "rm");
+        rmprlike: async (_parent: any, args: {input: IProfileactions}, context: any, _info: any) => {
+            return await practions(args.input, context.request.connection.remoteAddress, "rm");
         },
-        viewpr: async (_parent: any, args: IProfileactions, context: any, _info: any) => {
-            return await practions(args, context.request.connection.remoteAddress, "view");
+        viewpr: async (_parent: any, args: {input: IProfileactions}, context: any, _info: any) => {
+            return await practions(args.input, context.request.connection.remoteAddress, "view");
         },
 
-        editprofile: async (_parent: any, args: IProfileInput, context: any, _info: any) => {
-            return await editprofile(args, context.request.connection.remoteAddress)
+        editprofile: async (_parent: any, args: {input:  IProfileInput}, context: any, _info: any) => {
+            return await editprofile(args.input, context.request.connection.remoteAddress)
         }
         
     },
