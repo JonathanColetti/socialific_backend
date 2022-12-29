@@ -256,11 +256,10 @@ CREATE TABLE postmediatype (
 
 
 CREATE TABLE postcommentemoji(
-    id int NOT NULL AUTO_INCREMENT,
-    postid int NOT NULL,
+    commentid int NOT NULL,
     auid int NOT NULL,
     emoji VARCHAR(100) NOT NULL,
-    FOREIGN KEY (postid) REFERENCES posts(id),
+    FOREIGN KEY (commentid) REFERENCES comment(id),
     FOREIGN KEY (auid) REFERENCES userauth(id),
-    PRIMARY KEY (id)
+    PRIMARY KEY (postid, auid)
 );

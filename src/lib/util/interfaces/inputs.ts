@@ -59,7 +59,12 @@ export interface IRposts extends Input {
     sndid: number
     mid: number
 }
-
+export interface IEditpost extends Input {
+    
+    soundid: number,
+    caption: string,
+    pinned: number,
+}
 export interface IRcomments extends Input {postid: number}
 
 export interface IMediatype extends Input {name: string}
@@ -68,3 +73,14 @@ export interface IPostactions extends Input {postid: number}
 
 export interface IProfileactions extends Input {profileid: number}
 
+export interface IAddEmoji extends Input {
+    commentid: number
+}
+
+export interface rmPost extends Input { 
+    postid: number
+}
+
+export interface rmUa extends Input {
+    password: string
+}

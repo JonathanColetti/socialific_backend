@@ -144,3 +144,32 @@ export const editprofile = async (args: IProfileInput , ip: string, ) => {
     }
     return "Sucess"
 }
+
+
+export const deletepr = async (args: IProfileInput, ip: string) => {
+
+    if (args.uid === undefined) {
+        const report: Irepoting = {
+            ip: ip,
+            severity: 0,
+            filename: "deletepr",
+            values: undefined,
+            pid: 0
+        }
+        MissingError(report)
+        return null;
+    }
+    const theauth: iuserauth = await db.userauth.findOne({
+    where: {
+            userid: args.uid
+        }
+    })
+    if (theauth === null) return null;
+    const theprofile = await db.profiles.findOne({
+        where: {
+            auid: theauth.id
+        }
+    })
+    await theprofile.destory();
+    return "Sucess";
+}

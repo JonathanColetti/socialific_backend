@@ -1,5 +1,8 @@
 import db from "../database"
+import { rmUa } from "../lib/util/interfaces/inputs"
+import { Irepoting } from "../lib/util/interfaces/reports"
 import { iuserauth } from "../lib/util/interfaces/tables"
+import { MissingError } from "../reporting/rdb"
 
 export interface UActionInput {
     uid: string
@@ -40,4 +43,27 @@ export const userauthedit = async (args: UActionInput, ip: string): Promise<stri
         })
     }
     return "Sucess";
+}
+
+
+export const deleteua = async (args: rmUa, ip: string): Promise<null | "Sucess"> => {
+    if (args.uid === undefined && args.password === undefined) {
+        const report: Irepoting = {
+            ip: ip,
+            severity: 0,
+            filename: "",
+            values: undefined,
+            pid: 0
+        }
+        MissingError(report)
+        return null;
+    }
+    const theauth = await db.userauth.findOne({
+        where: {
+            userid: args.uid,
+            password: args.password
+        }
+    })
+    await theauth.destory();
+    return "Sucess"
 }
