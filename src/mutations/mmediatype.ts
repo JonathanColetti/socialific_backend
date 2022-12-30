@@ -18,7 +18,7 @@ export default async function mmediatype(args: IMediatype, ip: string): Promise<
             pid: 0
         }
         MissingError(report)
-        return null          
+        return null;      
     }
     // check if name exists
     const doesexist = await db.mediatype.findOne({
@@ -30,8 +30,5 @@ export default async function mmediatype(args: IMediatype, ip: string): Promise<
     const mediatype: IMediatype = await db.mediatype.create({
         category: args.name
     }).catch((err: any) => {console.log(err, "hello")})
-
     return mediatype
-
-
 }

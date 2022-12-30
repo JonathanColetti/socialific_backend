@@ -6,11 +6,15 @@ import { MissingError } from "../reporting/rdb";
 import { v4 as uuidv4 } from "uuid";
 import { iuserauth } from "../lib/util/interfaces/tables";
 
-/*
-    TODO
-        - Verify birthday
-        - Think about UUID collision
-        - Error Formatting
+/* Make userauth 
+    a. check args
+    b. check duplicate
+    c. create userauth
+
+TODO
+    - Verify birthday
+    - Think about UUID collision
+    - Error Formatting
 */
 export default async function muserauth(args: IUauthInput, ip: string) {
     // (A+B+C)(C+D)

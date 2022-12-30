@@ -5,6 +5,14 @@ import { Irepoting } from "../lib/util/interfaces/reports";
 import { iuserauth } from "../lib/util/interfaces/tables";
 import { MissingError } from "../reporting/rdb";
 
+/* add, rm like or add view on post
+    a. check args
+    b. find what to do
+    c. do that action
+    d. return 
+TODO 
+    - return post with updated values
+ */
 export const postactions = async (args: IPostactions, ip: string, addorrm: string): Promise<null | "Sucess"> => {
     if (args.uid === undefined && args.postid === undefined ) {
         const report: Irepoting = {
@@ -24,7 +32,7 @@ export const postactions = async (args: IPostactions, ip: string, addorrm: strin
     })
     if (theauth.id === undefined) return null;
     if (addorrm === "add") {
-        const likedpost = await db.postlikes.create({
+        await db.postlikes.create({
             auid: theauth.id,
             postid: args.postid
         }).catch((err: any) => {console.error(err)} )
@@ -49,7 +57,12 @@ export const postactions = async (args: IPostactions, ip: string, addorrm: strin
     }
 }
 
-
+/* Edit certain things about a post
+    a. check args
+    b. 
+TODO
+    - ALOT
+*/
 export const editpost = async (args: IEditpost, ip: string): Promise<null | "Sucess"> => {
     if (args.uid === undefined) {
         const report: Irepoting = {
@@ -89,7 +102,13 @@ export const editpost = async (args: IEditpost, ip: string): Promise<null | "Suc
     return "Sucess";
 }
 
+/* Delete a post
+    a. check args
+    b. get and destory
+    c. return status
+TODO
 
+*/
 export const removepost = async (args: IRmPost , ip: string): Promise<null | "Sucess"> => {
     if (args.uid === undefined || args.postid === undefined) {
         const report: Irepoting = {
@@ -118,7 +137,15 @@ export const removepost = async (args: IRmPost , ip: string): Promise<null | "Su
 
 }
 
+/* 
+Add emoji "reply"
+    a. check args
+    b. check validity
+    c. add 
+    d. return sucess
 
+TODO
+*/
 export const addEmoji = async (args: IAddEmoji, ip: string): Promise<null | 'Sucess'> => {
     if (args.uid === undefined || args.commentid === undefined || args.emoji === undefined) {
         const report: Irepoting = {

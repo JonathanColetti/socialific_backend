@@ -15,6 +15,7 @@ TODO
     - fix checkvalid 
 */
 export default async function mprofile( args: IProfileInput, ip: string ) {
+    // a + b
     if ( args.username === undefined || args.uid === undefined ) {
         // report and return null
         const report: Irepoting = {

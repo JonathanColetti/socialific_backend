@@ -11,6 +11,15 @@ export interface UActionInput {
     userpass: string
 }
 
+
+/* edit userauth
+    a. check args
+    b. return updated
+TODO 
+    return new userauth
+    
+    
+*/
 export const userauthedit = async (args: UActionInput, ip: string): Promise<string | null> => {
     
     if (args.uid === undefined) return null;
@@ -36,6 +45,7 @@ export const userauthedit = async (args: UActionInput, ip: string): Promise<stri
         })
     }
     if (args.userpass !== undefined) {
+        // valid password between 8,26 chars
         var passre: RegExp = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,26}$/;
         if (!passre.test(args.userpass)) return "invalid pass"
         theauth.update({
@@ -45,7 +55,11 @@ export const userauthedit = async (args: UActionInput, ip: string): Promise<stri
     return "Sucess";
 }
 
-
+/* delete userauth
+    a. check args
+    b. find one
+    c. 
+*/
 export const deleteua = async (args: IRmUa, ip: string): Promise<null | "Sucess"> => {
     if (args.uid === undefined && args.password === undefined) {
         const report: Irepoting = {
