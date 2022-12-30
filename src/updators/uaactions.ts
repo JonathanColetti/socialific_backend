@@ -51,7 +51,7 @@ export const deleteua = async (args: IRmUa, ip: string): Promise<null | "Sucess"
         const report: Irepoting = {
             ip: ip,
             severity: 0,
-            filename: "",
+            filename: "deleteua",
             values: undefined,
             pid: 0
         }
@@ -63,7 +63,7 @@ export const deleteua = async (args: IRmUa, ip: string): Promise<null | "Sucess"
             userid: args.uid,
             password: args.password
         }
-    })
+    }).catch((err: any) => {console.error(err)})
     await theauth.destory();
-    return "Sucess"
+    return "Sucess";
 }

@@ -118,7 +118,7 @@ export const removepost = async (args: IRmPost , ip: string): Promise<null | "Su
 }
 
 
-export const addEmoji = async (args: IAddEmoji, ip: string) => {
+export const addEmoji = async (args: IAddEmoji, ip: string): Promise<null | 'Sucess'> => {
     if (args.uid === undefined || args.commentid === undefined) {
         const report: Irepoting = {
             ip: ip,
@@ -137,7 +137,10 @@ export const addEmoji = async (args: IAddEmoji, ip: string) => {
     await db.postcommentemoji.create({
         commentid: args.commentid,
         auid: theauth.id
+    }).catch((err: any) => {
+        console.error(err);
     })
+    return "Sucess";
 
 
 }

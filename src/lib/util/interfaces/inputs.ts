@@ -37,7 +37,7 @@ export interface IUauthInput extends Input {
 }
 
 export interface ICommentsInput extends Input {
-    post: number
+    postid: number
     comment: string
     medialnk: string
 }
@@ -75,6 +75,7 @@ export interface IProfileactions extends Input {profileid: number}
 
 export interface IAddEmoji extends Input {
     commentid: number
+    whichemoji: string
 }
 
 export interface IRmPost extends Input { 

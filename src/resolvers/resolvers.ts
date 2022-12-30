@@ -74,7 +74,7 @@ const resolvers = {
         rmpost: async (_parent: any, args: {input: IRmPost }, context: any, _info: any) => {
             return await removepost(args.input, context.request.connection.remoteAddress)
         },
-        addemojipost: async (_parent: any, args: {input: IAddEmoji }, context: any, _info: any) => {
+        addemoiji: async (_parent: any, args: {input: IAddEmoji }, context: any, _info: any) => {
             return await addEmoji(args.input, context.request.connection.remoteAddress)
         },
     },

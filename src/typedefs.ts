@@ -23,6 +23,12 @@ const typeDefs = `
         rmprofile(input: RmPrInput): String
         rmuserauth(input: RmUaInput): String
         rmpost(input: RmPostInput): String
+        addemoiji(input: EmojiInput): String
+    }
+    input EmojiInput {
+        uid: String
+        commentid: Int
+        emoji: String
     }
     input RmPrInput {
         uid: String
