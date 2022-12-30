@@ -60,7 +60,15 @@ export const practions = async (args: {uid: string, profileid: number }, ip: str
     }
 }
 
-
+/* edit profile
+    a. check args
+    b. get profile
+    c. check each arg and update
+    d. return
+TODO
+    - 2fa
+    - return new profile
+*/
 export const editprofile = async (args: IProfileInput , ip: string, ) => {
     
     if (args.uid === undefined) {
@@ -146,6 +154,12 @@ export const editprofile = async (args: IProfileInput , ip: string, ) => {
 }
 
 
+/* delete profile
+    a. check args
+    b. delete
+    c. return status
+TODO
+*/
 export const deletepr = async (args: IRmPr, ip: string) => {
 
     if (args.uid === undefined) {
