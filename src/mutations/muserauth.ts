@@ -27,7 +27,7 @@ export default async function muserauth(args: IUauthInput, ip: string) {
         return {state: "Missing arg", userauth: null}
     }
     
-    const createdua: iuserauth = db.userauth.create({
+    const createdua: iuserauth = await db.userauth.create({
         userid: uuidv4(),
         password: args.password,
         birthday: args.birthday,
@@ -46,7 +46,7 @@ export default async function muserauth(args: IUauthInput, ip: string) {
         }
         return {state: err.message, userauth: null}
     })
-    return {state: "Sucess", createdua}
+    return {state: "Sucess", userauth: createdua}
 
 
      
