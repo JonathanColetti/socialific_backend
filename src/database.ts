@@ -14,6 +14,7 @@ import reports from './models/reports.js';
 import postmediatype from './models/postmediatype.js';
 import postlikes from './models/postlikes.js';
 import postviews from './models/postviews.js';
+import postcommentemoji from './models/postcommentemoji.js';
 
 dotenv.config()
 
@@ -29,6 +30,7 @@ let models: Array<Function> = [
     comments,
     mediatype,
     postmediatype,
+    postcommentemoji,
     tagratings,
     userratings,
     soundratings,

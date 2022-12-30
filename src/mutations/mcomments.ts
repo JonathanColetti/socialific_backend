@@ -15,7 +15,6 @@ TODO
     -  
 */
 export default async function mcomments(args: ICommentsInput, ip: string) {
-    console.log(args.postid)
     if (args.uid === undefined || args.comment === undefined || args.postid === undefined) {
             const report: Irepoting = {
                 severity: 0,
@@ -36,7 +35,7 @@ export default async function mcomments(args: ICommentsInput, ip: string) {
         }
     })
     if (theuser.id === undefined) {}
-    const createdcomment: any = db.comments.create({
+    const createdcomment: any = await db.comments.create({
         postid: args.postid,
         auid: theuser.id,
         comment: args.comment,

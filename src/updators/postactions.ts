@@ -1,3 +1,4 @@
+import { assertSchema } from "graphql";
 import db from "../database"
 import { IAddEmoji, IEditpost, IPostactions, IRmPost } from "../lib/util/interfaces/inputs";
 import { Irepoting } from "../lib/util/interfaces/reports";
@@ -119,7 +120,7 @@ export const removepost = async (args: IRmPost , ip: string): Promise<null | "Su
 
 
 export const addEmoji = async (args: IAddEmoji, ip: string): Promise<null | 'Sucess'> => {
-    if (args.uid === undefined || args.commentid === undefined) {
+    if (args.uid === undefined || args.commentid === undefined || args.emoji === undefined) {
         const report: Irepoting = {
             ip: ip,
             severity: 0,
@@ -136,9 +137,10 @@ export const addEmoji = async (args: IAddEmoji, ip: string): Promise<null | 'Suc
     if (theauth === null) return null;
     await db.postcommentemoji.create({
         commentid: args.commentid,
-        auid: theauth.id
+        auid: theauth.id,
+        emoji: args.emoji
     }).catch((err: any) => {
-        console.error(err);
+        console.error(err, "Hello");
     })
     return "Sucess";
 

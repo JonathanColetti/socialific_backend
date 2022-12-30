@@ -259,7 +259,7 @@ CREATE TABLE postcommentemoji(
     commentid int NOT NULL,
     auid int NOT NULL,
     emoji VARCHAR(100) NOT NULL,
-    FOREIGN KEY (commentid) REFERENCES comment(id),
+    FOREIGN KEY (commentid) REFERENCES comments(id),
     FOREIGN KEY (auid) REFERENCES userauth(id),
-    PRIMARY KEY (postid, auid)
+    PRIMARY KEY (commentid, auid)
 );

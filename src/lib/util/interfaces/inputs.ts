@@ -75,7 +75,7 @@ export interface IProfileactions extends Input {profileid: number}
 
 export interface IAddEmoji extends Input {
     commentid: number
-    whichemoji: string
+    emoji: string
 }
 
 export interface IRmPost extends Input { 
