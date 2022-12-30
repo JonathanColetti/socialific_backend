@@ -14,7 +14,7 @@ TODO
     - 2fa 
     -  
 */
-export default async function mcomments(args: ICommentsInput, ip: string) {
+export default async function mcomments(args: ICommentsInput, ip: string): Promise<null | any> {
     if (args.uid === undefined || args.comment === undefined || args.postid === undefined) {
             const report: Irepoting = {
                 severity: 0,
@@ -41,7 +41,9 @@ export default async function mcomments(args: ICommentsInput, ip: string) {
         comment: args.comment,
         commentlnk: args.medialnk
 
-    }).catch((err: any) => {})
+    }).catch((err: any) => {
+        console.log(err)
+    })
     return {
         state: "Sucess",
         comment: createdcomment

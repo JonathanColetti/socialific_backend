@@ -8,7 +8,7 @@ Make a media type
     b. check if already exists (maybe add it to the relationship)
     c. create media type
 */
-export default async function mmediatype(args: IMediatype, ip: string) {
+export default async function mmediatype(args: IMediatype, ip: string): Promise<null | any> {
     if (args.uid === undefined || args.name === undefined) {
         const report: Irepoting  = {
             ip: ip,
@@ -27,7 +27,7 @@ export default async function mmediatype(args: IMediatype, ip: string) {
         }
     }).catch((err: any) => console.error(err, "HH"))
     if (doesexist !== null && doesexist.category !== undefined) return doesexist
-    const mediatype = await db.mediatype.create({
+    const mediatype: IMediatype = await db.mediatype.create({
         category: args.name
     }).catch((err: any) => {console.log(err, "hello")})
 

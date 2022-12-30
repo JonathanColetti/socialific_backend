@@ -5,7 +5,7 @@ import checkvalid from "../lib/util/verification/checkvalid";
 import { MissingError } from "../reporting/rdb";
 import mmediatype from "./mmediatype";
 import keyword_extractor from "keyword-extractor";
-import { iuserauth } from "../lib/util/interfaces/tables";
+import { iposts, iuserauth } from "../lib/util/interfaces/tables";
 
 
 /*
@@ -19,7 +19,7 @@ TODO
     b. check ip
     c. make relation ships 
 */
-export default async function mpost(args: IPostsInput, ip: string) {
+export default async function mpost(args: IPostsInput, ip: string): Promise<any> {
     if ( args.uid === undefined || args.whosees === undefined || args.caption === undefined ) {
         const report: Irepoting = {
             ip: ip,
@@ -39,7 +39,7 @@ export default async function mpost(args: IPostsInput, ip: string) {
     });
     if (theauth === null) {console.log("AUTH NULL")}
     
-    const thepost = await db.posts.create({
+    const thepost: iposts = await db.posts.create({
         auid:  theauth.id,
         soundid: args.soundid,
         ctid: args.ctid,

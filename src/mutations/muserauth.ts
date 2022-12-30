@@ -26,7 +26,18 @@ export default async function muserauth(args: IUauthInput, ip: string) {
         MissingError(report)
         return {state: "Missing arg", userauth: null}
     }
-    
+    const checkphone: iuserauth = await db.userauth.findOne({
+        where: {
+            phonenum: args.phonenum
+        }
+    })
+    if (checkphone.phonenum == args.phonenum) return {state: "Duplicate phone", userauth: null}
+    const checkemail: iuserauth = await db.userauth.findOne({
+        where: {
+            email: args.email
+        }
+    })
+    if (checkemail.email == args.email) return {state: "Duplicate email", userauth: null}
     const createdua: iuserauth = await db.userauth.create({
         userid: uuidv4(),
         password: args.password,
